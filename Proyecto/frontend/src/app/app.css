@@ -1,0 +1,14 @@
+body{
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+app-root{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content{
+  flex: 1;
+}
