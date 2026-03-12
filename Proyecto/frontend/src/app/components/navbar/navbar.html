@@ -69,13 +69,13 @@
                     <ul class="dropdown-menu" style="background-color: #1d1d1d;">
                         <li>
                             <a class="dropdown-item text-white"
-                                routerLink="/secc_oro">
+                                routerLink="/admin/products">
                                 Listado de productos
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item text-white"
-                                routerLink="/secc_oro">
+                                routerLink="/admin/create-product">
                                 Publicar producto
                             </a>
                         </li>
@@ -84,14 +84,14 @@
                 <li class="nav-item" *ngIf="rol=='logged'">
                     <a class="nav-link active text-white" 
                         aria-current="page" 
-                        routerLink="/acerca_de">
+                        routerLink="/request">
                         <strong>Pedidos</strong>
                     </a>
                 </li>
                 <li class="nav-item" *ngIf="rol=='logged'">
                     <a class="nav-link active text-white" 
                         aria-current="page" 
-                        routerLink="/acerca_de">
+                        routerLink="/historial">
                         <strong>Historial</strong>
                     </a>
                 </li>
@@ -121,21 +121,21 @@
                 <li class="nav-item">
                     <a class="nav-link active text-white" 
                         aria-current="page" 
-                        routerLink="/login">
+                        routerLink="/signup">
                         <strong>Registrarse</strong>
                     </a>
                 </li>
                 <li class="nav-item" *ngIf="rol=='logged'">
                     <a class="nav-link active text-white" 
                         aria-current="page" 
-                        routerLink="/login">
+                        routerLink="/profile">
                         <strong>Perfil</strong>
                     </a>
                 </li>
                 <li class="nav-item" *ngIf="rol=='admin'">
                     <a class="nav-link active text-white" 
                         aria-current="page" 
-                        routerLink="/login">
+                        routerLink="/profile">
                         <strong>Administrador</strong>
                     </a>
                 </li>
