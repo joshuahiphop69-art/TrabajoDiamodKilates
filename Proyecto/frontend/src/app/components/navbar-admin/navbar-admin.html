@@ -59,7 +59,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item dropdown" *ngIf="rol=='admin'">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white"
                         role="button" 
                         data-bs-toggle="dropdown" 
@@ -69,31 +69,17 @@
                     <ul class="dropdown-menu" style="background-color: #1d1d1d;">
                         <li>
                             <a class="dropdown-item text-white"
-                                routerLink="/secc_oro">
+                                routerLink="/admin/products">
                                 Listado de productos
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item text-white"
-                                routerLink="/secc_oro">
+                                routerLink="/admin/create-stock">
                                 Publicar producto
                             </a>
                         </li>
                     </ul>
-                </li>
-                <li class="nav-item" *ngIf="rol=='logged'">
-                    <a class="nav-link active text-white" 
-                        aria-current="page" 
-                        routerLink="/acerca_de">
-                        <strong>Pedidos</strong>
-                    </a>
-                </li>
-                <li class="nav-item" *ngIf="rol=='logged'">
-                    <a class="nav-link active text-white" 
-                        aria-current="page" 
-                        routerLink="/acerca_de">
-                        <strong>Historial</strong>
-                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active text-white" 
@@ -114,28 +100,7 @@
                 <li class="nav-item">
                     <a class="nav-link active text-white" 
                         aria-current="page" 
-                        routerLink="/login">
-                        <strong>Iniciar sesión</strong>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active text-white" 
-                        aria-current="page" 
-                        routerLink="/login">
-                        <strong>Registrarse</strong>
-                    </a>
-                </li>
-                <li class="nav-item" *ngIf="rol=='logged'">
-                    <a class="nav-link active text-white" 
-                        aria-current="page" 
-                        routerLink="/login">
-                        <strong>Perfil</strong>
-                    </a>
-                </li>
-                <li class="nav-item" *ngIf="rol=='admin'">
-                    <a class="nav-link active text-white" 
-                        aria-current="page" 
-                        routerLink="/login">
+                        routerLink="/profile">
                         <strong>Administrador</strong>
                     </a>
                 </li>

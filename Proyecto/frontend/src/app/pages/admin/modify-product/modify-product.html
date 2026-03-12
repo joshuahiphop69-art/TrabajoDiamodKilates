@@ -1,0 +1,79 @@
+<div class="modal fade" id="editarProductoModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-warning">
+                <h5 class="modal-title">Editar Producto</h5>
+                <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal">
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        <input type="text"
+                            class="form-control"
+                            ngModel="producto.nombre"
+                            name="nombre">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Precio</label>
+                        <input type="number"
+                            class="form-control"
+                            ="producto.precio"
+                            name="precio">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Categoría</label>
+                            <select class="form-select"
+                                ngModel="producto.categoria"
+                                name="categoria">
+                            <option value="Oro">Oro</option>
+                            <option value="Plata">Plata</option>
+                            <option value="Otros">Otros</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Accesorio</label>
+                        <input type="text"
+                            class="form-control"
+                            ngModel="producto.accesorio"
+                            name="accesorio">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Existencias</label>
+                        <input type="number"
+                            class="form-control"
+                            ngModel="producto.existencias"
+                            name="existencias">
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+
+                <button class="btn btn-secondary"
+                    data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+
+                <button class="btn btn-success"
+                    data-bs-dismiss="modal"
+                    (click)="guardar()">
+                    Guardar cambios
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

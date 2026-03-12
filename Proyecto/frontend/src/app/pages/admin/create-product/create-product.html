@@ -1,0 +1,109 @@
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-dark text-white text-center">
+            <h4>Registrar Producto</h4>
+        </div>
+        <div class="card-body">
+            <form #productoForm="ngForm" (ngSubmit)="guardarProducto(productoForm)">
+                <!-- Nombre -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Nombre del producto</label>
+                    <input type="text"
+                        class="form-control"
+                        name="nombre"
+                        ngModel="producto.nombre"
+                        required
+                        minlength="3"
+                        #nombreCtrl="ngModel"
+                        placeholder="Ejemplo: Anillo Diamante">
+                    <div *ngIf="nombreCtrl.invalid && nombreCtrl.touched" class="text-danger">
+                        <small *ngIf="nombreCtrl.errors?.['required']">
+                            El nombre es obligatorio
+                        </small>
+                        <small *ngIf="nombreCtrl.errors?.['minlength']">
+                            Debe tener al menos 3 caracteres
+                        </small>
+                    </div>
+                </div>
+                <!-- Precio -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Precio</label>
+                    <input type="number"
+                        class="form-control"
+                        name="precio"
+                        ngModel="producto.precio"
+                        required
+                        min="1"
+                        #precioCtrl="ngModel"
+                        placeholder="Ingrese el precio">
+                    <div *ngIf="precioCtrl.invalid && precioCtrl.touched" class="text-danger">
+                        <small *ngIf="precioCtrl.errors?.['required']">
+                        El precio es obligatorio
+                        </small>
+                    </div>
+                </div>
+                <!-- Categoria -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Categoría</label>
+                    <select class="form-select"
+                        name="categoria"
+                        ngModel="producto.categoria"
+                        required
+                        #categoriaCtrl="ngModel">
+                    <option value="">Seleccione una categoría</option>
+                    <option value="Oro">Oro</option>
+                    <option value="Plata">Plata</option>
+                    <option value="Otros">Otros</option>
+                    </select>
+                    <div *ngIf="categoriaCtrl.invalid && categoriaCtrl.touched" class="text-danger">
+                        <small>
+                        Debe seleccionar una categoría
+                        </small>
+                    </div>
+                </div>
+                <!-- Accesorio -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Tipo de accesorio</label>
+                    <input type="text"
+                        class="form-control"
+                        name="accesorio"
+                        ngModel="producto.accesorio"
+                        required
+                        #accesorioCtrl="ngModel"
+                        placeholder="Ejemplo: Collar, Anillo, Pulsera">
+                    <div *ngIf="accesorioCtrl.invalid && accesorioCtrl.touched" class="text-danger">
+                        <small>
+                            El tipo de accesorio es obligatorio
+                        </small>
+                    </div>
+                </div>
+                <!-- Existencias -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Existencias</label>
+                    <input type="number"
+                        class="form-control"
+                        name="existencias"
+                        ngModel="producto.existencias"
+                        required
+                        min="0"
+                        #existCtrl="ngModel"
+                        placeholder="Cantidad en inventario">
+                    <div *ngIf="existCtrl.invalid && existCtrl.touched" class="text-danger">
+                        <small>
+                            Ingrese la cantidad disponible
+                        </small>
+                    </div>
+                </div>
+                <!-- Boton -->
+                <div class="d-grid">
+                    <button type="submit"
+                        class="btn btn-success"
+                        [disabled]="productoForm.invalid">
+                        Guardar Producto
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
