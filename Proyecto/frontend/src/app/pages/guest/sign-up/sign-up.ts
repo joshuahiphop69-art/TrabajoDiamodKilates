@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./sign-up.css']
 })
 export class SignUp {
-
+  
   usuario: string = '';
   telefono: string = '';
   password: string = '';

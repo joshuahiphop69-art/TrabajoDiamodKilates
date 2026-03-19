@@ -1,0 +1,31 @@
+.container {
+  min-height: 80vh;
+}
+
+/* Modo móvil */
+@media (max-width: 768px) {
+
+  .custom-table thead {
+    display: none;
+  }
+
+  .custom-table tr {
+    display: block;
+    margin-bottom: 15px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .custom-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .custom-table td::before {
+    content: attr(data-label);
+    font-weight: bold;
+  }
+}

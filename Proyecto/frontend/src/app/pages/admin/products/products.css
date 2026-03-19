@@ -1,0 +1,39 @@
+.buttons-wrapper {
+  padding: 10px;
+}
+
+.menu-btn {
+  flex: 1;
+  position: relative;
+  height: 30px;
+
+  background-size: cover;
+  background-position: center;
+
+  border-radius: 15px;
+  overflow: hidden;
+
+  text-decoration: none;
+  background-color: rgb(23, 23, 97);
+  color: rgb(231, 231, 231);
+
+  font-size: 0.75rem;
+}
+
+.btn-action {
+  flex: 1;
+  position: relative;
+  height: 30px;
+
+  background-size: cover;
+  background-position: center;
+
+  border-radius: 15px;
+  overflow: hidden;
+
+  text-decoration: none;
+  background-color: rgb(90, 0, 0);
+  color: rgb(231, 231, 231);
+
+  font-size: 0.75rem;
+}

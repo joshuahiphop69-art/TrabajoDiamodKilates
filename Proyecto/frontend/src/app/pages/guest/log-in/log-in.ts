@@ -17,32 +17,35 @@ export class LogIn {
   tituloModal = '';
   mensajeModal = '';
 
+  constructor(private auth: Perfiles, private router: Router) {}
+
   processForm(form: NgForm) {
     if (form.invalid) {
       this.tituloModal = 'Error';
       this.mensajeModal = 'Completa correctamente los campos';
-    } else {
-      this.tituloModal = 'Éxito';
-      this.mensajeModal = 'Inicio de sesión exitoso';
-      form.resetForm();
     }
 
-    const modal = document.getElementById('modalResult');
-    if (modal) {
-      new bootstrap.Modal(modal).show();
+    const telefono = form.value.telefono;
+    const password = form.value.password;
+
+    const success = this.auth.login(telefono, password);
+
+    if (success) {
+      // Redirigir después de 1 segundo
+      setTimeout(() => {
+        this.router.navigate(['/']);
+      }, 1000);
+
+    } else {
+      this.tituloModal = 'Error';
+      this.mensajeModal = 'Credenciales incorrectas';
+
+      this.showModal();
     }
   }
 
-  constructor(private auth:Perfiles, private router:Router){}
-
-  login(tipo:string){
-    if(tipo === "admin"){
-      this.auth.loginAdmin();
-      this.router.navigate(['/admin']);
-    }
-    if(tipo === "user"){
-      this.auth.loginUsuario();
-      this.router.navigate(['/usuario']);
-    }
+  showModal() {
+    const modal = new bootstrap.Modal(document.getElementById('modalResult'));
+    modal.show();
   }
 }

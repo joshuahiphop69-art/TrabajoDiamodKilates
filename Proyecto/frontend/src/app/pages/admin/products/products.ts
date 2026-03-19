@@ -1,47 +1,51 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ModifyProduct } from '../modify-product/modify-product'
+import { prod } from '../../../services/product';
 
 @Component({
-  selector: 'app-products',
-  standalone: true,
-  imports: [ModifyProduct, CommonModule],
+  selector: 'app-listado',
+  standalone:true,
+  imports: [CommonModule],
   templateUrl: './products.html',
-  styleUrls: ['./products.css']
+  styleUrl: './products.css',
 })
-export class Products {
+export class Products implements OnInit {
+  prods: any[] = [];
 
-  productos = [
-    { nombre: "Anillo Diamante", precio: 5200, categoria: "Oro", accesorio: "Anillo", existencias: 5 },
-    { nombre: "Pulsera Elegance", precio: 1800, categoria: "Plata", accesorio: "Pulsera", existencias: 12 },
-    { nombre: "Collar Corazón", precio: 2400, categoria: "Oro", accesorio: "Collar", existencias: 7 },
-    { nombre: "Aretes Luna", precio: 950, categoria: "Plata", accesorio: "Aretes", existencias: 20 },
-    { nombre: "Cadena Real", precio: 3100, categoria: "Oro", accesorio: "Cadena", existencias: 6 },
-    { nombre: "Pulsera Perlas", precio: 1450, categoria: "Otros", accesorio: "Pulsera", existencias: 10 },
-    { nombre: "Anillo Promesa", precio: 2700, categoria: "Oro", accesorio: "Anillo", existencias: 8 },
-    { nombre: "Collar Estrella", precio: 1650, categoria: "Plata", accesorio: "Collar", existencias: 9 },
-    { nombre: "Aretes Cristal", precio: 850, categoria: "Otros", accesorio: "Aretes", existencias: 15 },
-    { nombre: "Cadena Clásica", precio: 2200, categoria: "Oro", accesorio: "Cadena", existencias: 11 }
-  ];
+  constructor(private prodService: prod ) {
+    console.log("Constructor Listado");
+  }
+  
+  ngOnInit(): void {
+    console.log("Entré al listado");
+    this.loadprods();
+  }
 
-  productoSeleccionado: any = {};
+  loadprods() {
+    this.prodService.getprods().subscribe({
+      next: (data) => {
+        this.prods = data;
+        console.log("Productos cargados:", this.prods);
+      },
+      error: (error) => {
+        console.error("Error al obtener productos:", error);
+      }
+    });
+  }
 
-  eliminarProducto(index: number) {
+  deleteprod(id: string) {
     if (confirm("¿Seguro que deseas eliminar este producto?")) {
-      this.productos.splice(index, 1);
-    }
-  }
-
-  abrirEdicion(producto: any) {
-    this.productoSeleccionado = { ...producto };
-  }
-
-  guardarCambios(productoEditado: any) {
-
-    const index = this.productos.findIndex(p => p.nombre === productoEditado.nombre);
-
-    if (index !== -1) {
-      this.productos[index] = productoEditado;
+      this.prodService.deleteprod(id).subscribe({
+        next: () => {
+          console.log("Eliminado correctamente");
+          alert("Producto eliminado");
+          this.loadprods();
+          window.location.reload();
+        },
+        error: (error) => {
+          console.error("Error al eliminar:", error);
+        }
+      });
     }
   }
 }

@@ -1,21 +1,5 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand">
-            <img src="images/logo_igneous_code.png" 
-                alt="Logo"
-                width="30" 
-                height="30"
-                class="d-inline-block rounded-circle">
-        </a>
-        <button class="navbar-toggler" 
-            type="button" 
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavDropdown" 
-            aria-controls="navbarNavDropdown" 
-            aria-expanded="false" 
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -36,29 +20,24 @@
                         <li>
                             <a class="dropdown-item text-white"
                                 routerLink="/catalogo">
-                                Catálogo general
+                                Todos los accesorios
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item text-white"
                                 routerLink="/secc_oro">
-                                Categoría de oro
+                                Accesorios de oro
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item text-white" 
                                 routerLink="/secc_plt">
-                                Categoría de plata
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item text-white"
-                                routerLink="/secc_ext">
-                                Otras categorías
+                                Accesorios de plata
                             </a>
                         </li>
                     </ul>
                 </li>
+<<<<<<< Updated upstream
                 <li class="nav-item dropdown" *ngIf="rol=='admin'">
                     <a class="nav-link dropdown-toggle text-white"
                         role="button" 
@@ -86,45 +65,65 @@
                         aria-current="page" 
                         routerLink="/acerca_de">
                         <strong>Pedidos</strong>
+=======
+                <li class="nav-item" *ngIf="rol=='admin'">
+                    <a class="nav-link active text-white" 
+                        aria-current="page" 
+                        routerLink="/request">
+                        <strong>Listado de Pedidos</strong>
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="rol=='admin'">
+                    <a class="nav-link active text-white" 
+                        aria-current="page" 
+                        routerLink="/products">
+                        <strong>Administración</strong>
+>>>>>>> Stashed changes
                     </a>
                 </li>
                 <li class="nav-item" *ngIf="rol=='logged'">
                     <a class="nav-link active text-white" 
                         aria-current="page" 
+<<<<<<< Updated upstream
                         routerLink="/acerca_de">
                         <strong>Historial</strong>
+=======
+                        routerLink="/carrito">
+                        <strong>Compras y Pedidos</strong>
+>>>>>>> Stashed changes
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active text-white" 
                         aria-current="page" 
                         routerLink="/acerca_de">
-                        <strong>Acerca de</strong>
+                        <strong>Contacto</strong>
                     </a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
-                <a class="navbar-brand">
+                <a class="navbar-brand" *ngIf="rol=='logged'">
                     <img src="images/logo_igneous_code.png" 
                         alt="Image Invitado"
                         width="30" 
                         height="30"
                         class="d-inline-block rounded-circle">
                 </a>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="rol=='guest'">
                     <a class="nav-link active text-white" 
                         aria-current="page" 
                         routerLink="/login">
                         <strong>Iniciar sesión</strong>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="rol=='guest'">
                     <a class="nav-link active text-white" 
                         aria-current="page" 
                         routerLink="/login">
                         <strong>Registrarse</strong>
                     </a>
                 </li>
+<<<<<<< Updated upstream
                 <li class="nav-item" *ngIf="rol=='logged'">
                     <a class="nav-link active text-white" 
                         aria-current="page" 
@@ -137,9 +136,30 @@
                         aria-current="page" 
                         routerLink="/login">
                         <strong>Administrador</strong>
+=======
+                <li class="nav-item" *ngIf="rol=='admin'">
+                    <a class="nav-link text-white" 
+                        (click)="openProfile()">
+                        <strong>Perfil</strong>
+                    </a>
+                </li>
+                <li class="nav-item" *ngIf="rol=='logged'">
+                    <a class="nav-link text-white" 
+                        (click)="openProfile()">
+                        <strong>Perfil</strong>
+>>>>>>> Stashed changes
                     </a>
                 </li>
             </ul>
         </div>
+        <button class="navbar-toggler ms-auto" 
+            type="button" 
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown" 
+            aria-controls="navbarNavDropdown" 
+            aria-expanded="false" 
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
     </div>
 </nav>
