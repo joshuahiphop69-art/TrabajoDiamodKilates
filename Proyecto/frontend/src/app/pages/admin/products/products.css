@@ -1,11 +1,7 @@
-.buttons-wrapper {
-  padding: 10px;
-}
-
-.menu-btn {
+.etiq-cate {
   flex: 1;
   position: relative;
-  height: 30px;
+  height: 35px;
 
   background-size: cover;
   background-position: center;
@@ -17,23 +13,7 @@
   background-color: rgb(23, 23, 97);
   color: rgb(231, 231, 231);
 
-  font-size: 0.75rem;
-}
+  font-size: 0.9rem;
 
-.btn-action {
-  flex: 1;
-  position: relative;
-  height: 30px;
-
-  background-size: cover;
-  background-position: center;
-
-  border-radius: 15px;
-  overflow: hidden;
-
-  text-decoration: none;
-  background-color: rgb(90, 0, 0);
-  color: rgb(231, 231, 231);
-
-  font-size: 0.75rem;
+  transition: transform 0.3s ease;
 }

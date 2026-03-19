@@ -9,7 +9,9 @@
                 <thead>
                     <tr>
                         <th>Nombre del producto</th>
-                        <th>Categorías</th>
+                        <th>Cátalogo</th>
+                        <th>Tipo de accesorio</th>
+                        <th>Etiquetas</th>
                         <th>Precio</th>
                         <th>Acciones</th>
                     </tr>
@@ -17,34 +19,26 @@
                 <tbody>
                     <tr *ngFor="let prod of prods">
                         <td data-label="Nombre del producto">{{prod.nombre}}</td>
-                        <td data-label="Categorías">
-                            <div class="buttons-wrapper">
-                                <button class="btn btn-sm menu-btn">
-                                    {{prod.material}}
-                                </button>
-                                <button class="btn btn-sm menu-btn">
-                                    {{prod.categoria}}
-                                </button>
-                                <button class="btn btn-sm menu-btn">
-                                    {{prod.etiq_1}}
-                                </button>
-                                <button class="btn btn-sm menu-btn">
-                                    {{prod.etiq_2}}
-                                </button>
-                            </div>
+                        <td data-label="Cátalogo">{{prod.material}}</td>
+                        <td data-label="Tipo de accesorio">{{prod.categoria}}</td>
+                        <td data-label="Etiquetas">
+                            <button class="btn btn-sm etiq-cate">
+                                {{prod.etiq_1}}
+                            </button>
+                            <button class="btn btn-sm etiq-cate">
+                                {{prod.etiq_2}}
+                            </button>
                         </td>
                         <td data-label="Precio">${{prod.precio}}</td>
                         <td data-label="Acciones">
-                            <div class="buttons-wrapper">
-                                <button class="btn btn-sm btn-action"
-                                    (click)="deleteprod(prod._id)">
-                                    Modificar
-                                </button>
-                                <button class="btn btn-sm btn-action"
-                                    (click)="deleteprod(prod._id)">
-                                    Eliminar
-                                </button>
-                            </div>
+                            <button class="btn btn-danger btn-sm"
+                                (click)="deleteprod(prod._id)">
+                                Modificar
+                            </button>
+                            <button class="btn btn-danger btn-sm"
+                                (click)="deleteprod(prod._id)">
+                                Eliminar
+                            </button>
                         </td>
                     </tr>
                 </tbody>

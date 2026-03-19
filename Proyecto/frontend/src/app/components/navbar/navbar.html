@@ -37,35 +37,6 @@
                         </li>
                     </ul>
                 </li>
-<<<<<<< Updated upstream
-                <li class="nav-item dropdown" *ngIf="rol=='admin'">
-                    <a class="nav-link dropdown-toggle text-white"
-                        role="button" 
-                        data-bs-toggle="dropdown" 
-                        aria-expanded="false">
-                        <strong>Inventario</strong>
-                    </a>
-                    <ul class="dropdown-menu" style="background-color: #1d1d1d;">
-                        <li>
-                            <a class="dropdown-item text-white"
-                                routerLink="/secc_oro">
-                                Listado de productos
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item text-white"
-                                routerLink="/secc_oro">
-                                Publicar producto
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item" *ngIf="rol=='logged'">
-                    <a class="nav-link active text-white" 
-                        aria-current="page" 
-                        routerLink="/acerca_de">
-                        <strong>Pedidos</strong>
-=======
                 <li class="nav-item" *ngIf="rol=='admin'">
                     <a class="nav-link active text-white" 
                         aria-current="page" 
@@ -78,19 +49,13 @@
                         aria-current="page" 
                         routerLink="/products">
                         <strong>Administración</strong>
->>>>>>> Stashed changes
                     </a>
                 </li>
                 <li class="nav-item" *ngIf="rol=='logged'">
                     <a class="nav-link active text-white" 
                         aria-current="page" 
-<<<<<<< Updated upstream
-                        routerLink="/acerca_de">
-                        <strong>Historial</strong>
-=======
                         routerLink="/carrito">
                         <strong>Compras y Pedidos</strong>
->>>>>>> Stashed changes
                     </a>
                 </li>
                 <li class="nav-item">
@@ -119,24 +84,10 @@
                 <li class="nav-item" *ngIf="rol=='guest'">
                     <a class="nav-link active text-white" 
                         aria-current="page" 
-                        routerLink="/login">
+                        routerLink="/signup">
                         <strong>Registrarse</strong>
                     </a>
                 </li>
-<<<<<<< Updated upstream
-                <li class="nav-item" *ngIf="rol=='logged'">
-                    <a class="nav-link active text-white" 
-                        aria-current="page" 
-                        routerLink="/login">
-                        <strong>Perfil</strong>
-                    </a>
-                </li>
-                <li class="nav-item" *ngIf="rol=='admin'">
-                    <a class="nav-link active text-white" 
-                        aria-current="page" 
-                        routerLink="/login">
-                        <strong>Administrador</strong>
-=======
                 <li class="nav-item" *ngIf="rol=='admin'">
                     <a class="nav-link text-white" 
                         (click)="openProfile()">
@@ -147,7 +98,6 @@
                     <a class="nav-link text-white" 
                         (click)="openProfile()">
                         <strong>Perfil</strong>
->>>>>>> Stashed changes
                     </a>
                 </li>
             </ul>
