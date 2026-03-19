@@ -28,6 +28,9 @@ export class LogIn {
     const telefono = form.value.telefono;
     const password = form.value.password;
 
+    console.log("Telefono:", telefono);
+    console.log("Password:", password);
+
     const success = this.auth.login(telefono, password);
 
     if (success) {

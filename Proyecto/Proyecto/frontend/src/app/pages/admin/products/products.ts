@@ -1,23 +1,21 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { prod } from '../../../services/product';
 
 @Component({
   selector: 'app-listado',
-  standalone:true,
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './products.html',
   styleUrl: './products.css',
 })
 export class Products implements OnInit {
+
   prods: any[] = [];
 
-  constructor(private prodService: prod ) {
-    console.log("Constructor Listado");
-  }
-  
+  constructor(private prodService: prod) {}
+
   ngOnInit(): void {
-    console.log("Entré al listado");
     this.loadprods();
   }
 
@@ -35,12 +33,13 @@ export class Products implements OnInit {
 
   deleteprod(id: string) {
     if (confirm("¿Seguro que deseas eliminar este producto?")) {
+
       this.prodService.deleteprod(id).subscribe({
         next: () => {
-          console.log("Eliminado correctamente");
-          alert("Producto eliminado");
-          this.loadprods();
-          window.location.reload();
+          alert("Producto eliminado correctamente");
+
+          // Quitamos el producto del arreglo sin recargar la página
+          this.prods = this.prods.filter(p => p._id !== id);
         },
         error: (error) => {
           console.error("Error al eliminar:", error);
@@ -48,4 +47,10 @@ export class Products implements OnInit {
       });
     }
   }
+
+  editprod(prod: any) {
+    console.log("Editar producto:", prod);
+
+  }
+
 }
