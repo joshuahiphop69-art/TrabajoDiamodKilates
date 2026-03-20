@@ -1,0 +1,21 @@
+<div class="container mt-4">
+  <h2>Historial de Compras</h2>
+
+  <div *ngIf="orders.length === 0">
+    No hay compras registradas
+  </div>
+
+  <div *ngFor="let order of orders" class="card mb-3">
+    <div class="card-body">
+      <h5>Pedido #{{ order.id }}</h5>
+      <p>Fecha: {{ order.fecha }}</p>
+      <p>Total: ${{ order.total }}</p>
+
+      <ul>
+        <li *ngFor="let item of order.items">
+          {{ item.nombre }} - ${{ item.precio }} x {{ item.cantidad }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

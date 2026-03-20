@@ -23,9 +23,12 @@ import { CreateProduct } from './pages/admin/create-product/create-product';
 import { ModifyProduct } from './pages/admin/modify-product/modify-product';
 import { Products } from './pages/admin/products/products';
 
-// 🛒 TU CARRITO (IMPORTANTE)
+// 🛒 TU CARRITO
 import { CartComponent } from './pages/cart/cart.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+
+// 🆕 TU HISTORIAL
+import { HistorialComponent } from './pages/historial/historial';
 
 export const routes: Routes = [
     { path: "", component: Home },
@@ -34,7 +37,7 @@ export const routes: Routes = [
     { path: "secc_plt", component: ProdPlata },
     { path: "secc_ext", component: ProdExtra },
 
-    // 👇 TU PARTE (NO SE TOCA)
+    // 👇 TU PARTE
     { path: "compras-pedidos", component: CartComponent },
     { path: "checkout", component: CheckoutComponent },
 
@@ -43,7 +46,12 @@ export const routes: Routes = [
     { path: "login", component: LogIn },
     { path: "signup", component: SignUp },
 
+    // 👇 HISTORIAL DEL SISTEMA (tu equipo)
     { path: "historial", component: Historial },
+
+    // 👇 TU HISTORIAL (cambiamos ruta para evitar conflicto)
+    { path: "mis-compras", component: HistorialComponent },
+
     { path: "profile", component: Profile },
     { path: "request", component: Request },
 

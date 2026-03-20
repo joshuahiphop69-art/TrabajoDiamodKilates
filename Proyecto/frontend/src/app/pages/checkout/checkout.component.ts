@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CartItem } from '../../models/cart-item.model';
 import { CartService } from '../../services/cart.service';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-checkout',
@@ -24,7 +25,8 @@ export class CheckoutComponent {
 
   constructor(
     private readonly cartService: CartService,
-    private readonly router: Router
+    private readonly router: Router,
+    private orderService: OrderService
   ) {
     this.items = [...this.cartService.getItems()];
   }
@@ -42,6 +44,16 @@ export class CheckoutComponent {
     };
 
     console.log('Pedido enviado:', this.pedidoGenerado);
+
+    // ✅ NUEVO: guardar en historial
+    const order = {
+      id: Date.now().toString(),
+      fecha: new Date().toLocaleString(),
+      items: this.items,
+      total: this.cartService.getTotal()
+    };
+
+    this.orderService.addOrder(order);
 
     // Aquí luego conectamos con backend
     this.cartService.clearCart();
