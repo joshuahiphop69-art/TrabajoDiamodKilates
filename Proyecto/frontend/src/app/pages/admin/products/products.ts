@@ -1,23 +1,24 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { prod } from '../../../services/product';
 
 @Component({
   selector: 'app-listado',
-  standalone:true,
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './products.html',
   styleUrl: './products.css',
 })
 export class Products implements OnInit {
+
   prods: any[] = [];
 
-  constructor(private prodService: prod ) {
-    console.log("Constructor Listado");
-  }
-  
+  constructor(
+    private prodService: prod,
+    private cd: ChangeDetectorRef
+  ) {}
+
   ngOnInit(): void {
-    console.log("Entré al listado");
     this.loadprods();
   }
 
@@ -25,6 +26,10 @@ export class Products implements OnInit {
     this.prodService.getprods().subscribe({
       next: (data) => {
         this.prods = data;
+
+        // 🔥 Forzamos detección de cambios (fix hydration bug)
+        this.cd.detectChanges();
+
         console.log("Productos cargados:", this.prods);
       },
       error: (error) => {
@@ -35,12 +40,11 @@ export class Products implements OnInit {
 
   deleteprod(id: string) {
     if (confirm("¿Seguro que deseas eliminar este producto?")) {
+
       this.prodService.deleteprod(id).subscribe({
         next: () => {
-          console.log("Eliminado correctamente");
-          alert("Producto eliminado");
-          this.loadprods();
-          window.location.reload();
+          this.prods = this.prods.filter(p => p._id !== id);
+          this.cd.detectChanges(); // 🔥 también aquí
         },
         error: (error) => {
           console.error("Error al eliminar:", error);
@@ -48,4 +52,9 @@ export class Products implements OnInit {
       });
     }
   }
+
+  editprod(prod: any) {
+    console.log("Editar producto:", prod);
+  }
+
 }
