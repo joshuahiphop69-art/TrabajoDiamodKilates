@@ -1,0 +1,96 @@
+<div class="container-fluid py-4" style="background-color: #97a5b6; min-height: 70vh;">
+    <div class="container">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+            <div>
+                <h2 class="fw-bold mb-1">Compras y pedidos</h2>
+                <p class="mb-0">Revisa tu carrito, cambia productos y prepara tu pedido antes del pago.</p>
+            </div>
+        </div>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                    <h4 class="fw-bold mb-0">Productos disponibles</h4>
+                    <span class="text-muted">Agrega productos directamente desde este apartado</span>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-4" *ngFor="let producto of productosDisponibles">
+                        <div class="card h-100 border-0 bg-light">
+                            <img [src]="producto.imagen" [alt]="producto.nombre" class="card-img-top" style="height: 220px; object-fit: cover;">
+                            <div class="card-body">
+                                <h5 class="fw-bold">{{ producto.nombre }}</h5>
+                                <p class="mb-1 text-uppercase text-muted">{{ producto.categoria }}</p>
+                                <p class="mb-3">Precio: <strong>${{ producto.precio | number }}</strong></p>
+                                <button class="btn text-white w-100" style="background-color: #004394" (click)="agregarAlCarrito(producto)">
+                                    Agregar al carrito
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="items.length === 0" class="card shadow-sm">
+            <div class="card-body p-4 text-center">
+                <h4 class="fw-bold">Tu carrito esta vacio</h4>
+                <p class="mb-0">Selecciona uno o varios productos del listado para comenzar tu pedido.</p>
+            </div>
+        </div>
+
+        <div *ngIf="items.length > 0" class="row g-4">
+            <div class="col-lg-8">
+                <div class="card shadow-sm mb-3" *ngFor="let item of items">
+                    <div class="card-body">
+                        <div class="row g-3 align-items-center">
+                            <div class="col-md-3 text-center">
+                                <img [src]="item.imagen" [alt]="item.nombre" class="img-fluid rounded" style="max-height: 140px; object-fit: cover;">
+                            </div>
+                            <div class="col-md-5">
+                                <h4 class="fw-bold">{{ item.nombre }}</h4>
+                                <p class="mb-1">Precio unitario: <strong>${{ item.precio | number }}</strong></p>
+                                <p class="mb-0">Subtotal: <strong>${{ item.precio * item.cantidad | number }}</strong></p>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label fw-bold">Cantidad</label>
+                                <input type="number" min="1" class="form-control mb-3" [ngModel]="item.cantidad" (ngModelChange)="cambiarCantidad(item.id, $event)">
+
+                                <label class="form-label fw-bold">Cambiar producto</label>
+                                <select class="form-select mb-3" [(ngModel)]="reemplazos[item.id]">
+                                    <option [ngValue]="item.id">Mantener producto actual</option>
+                                    <option *ngFor="let producto of productosDisponibles" [ngValue]="producto.id">
+                                        {{ producto.nombre }} - ${{ producto.precio | number }}
+                                    </option>
+                                </select>
+
+                                <div class="d-grid gap-2">
+                                    <button class="btn text-white" style="background-color: #1f6f5f" (click)="cambiarProducto(item.id)">
+                                        Cambiar producto
+                                    </button>
+                                    <button class="btn btn-outline-danger" (click)="eliminar(item.id)">
+                                        Eliminar del pedido
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4 class="fw-bold">Resumen del pedido</h4>
+                        <p class="mb-2">Productos seleccionados: <strong>{{ items.length }}</strong></p>
+                        <p class="mb-4">Total actual: <strong>${{ total() | number }}</strong></p>
+                        <div class="d-grid gap-2">
+                            <button class="btn text-white" style="background-color: #004394" (click)="irPago()">
+                                Editar pedido y pagar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

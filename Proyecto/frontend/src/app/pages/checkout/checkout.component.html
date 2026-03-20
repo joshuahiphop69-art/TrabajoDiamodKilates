@@ -1,0 +1,8 @@
+<h2>Forma de Pago</h2>
+
+<select [(ngModel)]="metodoPago">
+  <option value="tarjeta">Tarjeta</option>
+  <option value="efectivo">Efectivo</option>
+</select>
+
+<button (click)="confirmarPago()">Confirmar pago</button>
