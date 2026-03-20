@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { Perfiles } from '../../../services/perfiles';
 
 declare var bootstrap: any;
@@ -12,10 +13,36 @@ declare var bootstrap: any;
   styleUrl: './profile.css',
 })
 export class Profile {
-  nombreUsuario = 'Eevee';
+
+  nombreUsuario = '';
+  fotoUsuario = '';
   seccion: 'datos' | 'seguridad' | null = null;
 
-  constructor(private auth: Perfiles) {}
+  constructor(
+    private auth: Perfiles,
+    private router: Router
+  ) {
+
+    // 🔥 Se actualiza automáticamente cuando cambia login/logout
+    this.auth.role$.subscribe(() => {
+      this.loadUser();
+    });
+
+    // 🔥 Carga inicial
+    this.loadUser();
+  }
+
+  private loadUser() {
+    const user = this.auth.getUser();
+
+    if (user) {
+      this.nombreUsuario = user.nombre;
+      this.fotoUsuario = user.foto;
+    } else {
+      this.nombreUsuario = '';
+      this.fotoUsuario = '';
+    }
+  }
 
   setSeccion(sec: 'datos' | 'seguridad') {
     this.seccion = sec;
@@ -27,13 +54,21 @@ export class Profile {
   }
 
   logout() {
-    this.auth.logout();
 
     const panel = bootstrap.Offcanvas.getInstance(
       document.getElementById('profilePanel')
     );
 
-    panel.hide();
+    if (panel) {
+      panel.hide();
+    }
+
+    this.auth.logout();
+
+    // 🔥 Espera que cierre animación y navega
+    setTimeout(() => {
+      this.router.navigate(['/']);
+    }, 200);
   }
 
   openPanel() {
@@ -43,4 +78,3 @@ export class Profile {
     panel.show();
   }
 }
-

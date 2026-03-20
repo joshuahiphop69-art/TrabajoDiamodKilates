@@ -1,55 +1,77 @@
 <div class="container mt-4">
   <div class="card shadow-lg border-0">
+
     <div class="card-header bg-dark text-white">
       <h2 class="fs-3 fw-bold m-0">Listado de productos</h2>
     </div>
 
     <div class="card-body">
-      <div class="row g-4 justify-content-center">
 
-        <div 
-          class="col-12 col-md-6 col-lg-4"
-          *ngFor="let prod of prods"
-        >
-          <div class="card h-100 shadow-sm border-0">
+      <!-- 🔥 Hace la tabla responsive en móvil -->
+      <div class="table-responsive">
 
-            <div class="card-body d-flex flex-column">
-              <h5 class="fw-bold">{{ prod.nombre }}</h5>
+        <table class="table table-striped custom-table align-middle">
 
-              <p class="mb-1">
-                <strong>Categoría:</strong> {{ prod.categoria }}
-              </p>
+          <thead class="table-dark">
+            <tr>
+              <th>Nombre del producto</th>
+              <th>Catálogo</th>
+              <th>Tipo de accesorio</th>
+              <th>Etiquetas</th>
+              <th>Precio</th>
+              <th class="text-center">Acciones</th>
+            </tr>
+          </thead>
 
-              <p class="mb-1">
-                <strong>Accesorio:</strong> {{ prod.accesorio }}
-              </p>
+          <tbody>
+            <tr *ngFor="let prod of prods">
 
-              <p class="mt-auto fs-5 fw-bold text-success">
+              <td>{{ prod.nombre }}</td>
+
+              <td>{{ prod.material }}</td>
+
+              <td>{{ prod.categoria }}</td>
+
+              <td>
+                <span class="badge bg-secondary me-1">
+                  {{ prod.etiq_1 }}
+                </span>
+                <span class="badge bg-info text-dark">
+                  {{ prod.etiq_2 }}
+                </span>
+              </td>
+
+              <td class="fw-bold text-success">
                 ${{ prod.precio }}
-              </p>
+              </td>
 
-              <div class="d-flex justify-content-between mt-3">
+              <td class="text-center">
+
+                <!-- 🔥 Ahora sí editar es amarillo -->
                 <button 
-                  class="btn btn-warning btn-sm"
+                  class="btn btn-warning btn-sm me-2"
                   (click)="editprod(prod)"
                 >
-                  Editar
+                  Modificar
                 </button>
 
+                <!-- 🔥 Eliminar rojo -->
                 <button 
                   class="btn btn-danger btn-sm"
                   (click)="deleteprod(prod._id)"
                 >
                   Eliminar
                 </button>
-              </div>
 
-            </div>
+              </td>
 
-          </div>
-        </div>
+            </tr>
+          </tbody>
+
+        </table>
 
       </div>
+
     </div>
   </div>
 </div>
