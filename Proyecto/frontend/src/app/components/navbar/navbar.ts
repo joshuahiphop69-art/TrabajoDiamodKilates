@@ -3,6 +3,8 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Perfiles } from '../../services/perfiles';
 
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -11,11 +13,25 @@ import { Perfiles } from '../../services/perfiles';
   styleUrl: './navbar.css',
 })
 export class Navbar {
-  rol="guest";
+  rol: 'admin' | 'logged' | 'guest' = 'guest';
 
-  constructor(private auth:Perfiles){}
+  constructor(private auth: Perfiles) {}
 
-  ngOnInit(){
-    this.rol = this.auth.getRol();
+  ngOnInit(): void {
+    this.auth.role$.subscribe(role => {
+      this.rol = role;
+    });
+  }
+
+  logout() {
+    this.auth.logout();
+    this.rol = 'guest';
+  }
+
+  openProfile() {
+    const panel = new bootstrap.Offcanvas(
+    document.getElementById('profilePanel')
+  );
+  panel.show();
   }
 }

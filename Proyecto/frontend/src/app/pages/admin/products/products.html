@@ -1,52 +1,48 @@
-<div class="container mt-4">
-    <h3 class="text-center mb-4">Inventario de Joyería</h3>
-    <table class="table table-striped table-hover shadow">
-        <thead class="table-dark">
-            <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Precio ($)</th>
-                <th>Categoría</th>
-                <th>Accesorio</th>
-                <th>Existencias</th>
-                <th>Modificar</th>
-                <th>Eliminar</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let producto of productos; let i = index">
-                <td>{{i+1}}</td>
-                <td>{{producto.nombre}}</td>
-                <td>{{producto.precio}}</td>
-                <td>{{producto.categoria}}</td>
-                <td>{{producto.accesorio}}</td>
-                <td>{{producto.existencias}}</td>
-                <!-- BOTON MODIFICAR -->
-                <td>
-                    <button
-                        class="btn btn-warning btn-sm"
-                        data-bs-toggle="modal"
-                        data-bs-target="#editarProductoModal"
-                        (click)="abrirEdicion(producto)">
-                        Modificar
-                    </button>
-                </td>
-                <!-- BOTON ELIMINAR -->
-                <td>
-                    <button
-                        class="btn btn-danger btn-sm"
-                        (click)="eliminarProducto(i)">
-                        Eliminar
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div class="container mt-4" >
+    <div class="card shadow-lg border-0">
+        <div class="card-header bg-dark text-white">
+            <h2 class="fs-3 fw-bold m-0">Listado de productos</h2>
+        </div>
+
+        <div class="card-body">
+            <table class="table table-striped custom-table">
+                <thead>
+                    <tr>
+                        <th>Nombre del producto</th>
+                        <th>Cátalogo</th>
+                        <th>Tipo de accesorio</th>
+                        <th>Etiquetas</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let prod of prods">
+                        <td data-label="Nombre del producto">{{prod.nombre}}</td>
+                        <td data-label="Cátalogo">{{prod.material}}</td>
+                        <td data-label="Tipo de accesorio">{{prod.categoria}}</td>
+                        <td data-label="Etiquetas">
+                            <button class="btn btn-sm etiq-cate">
+                                {{prod.etiq_1}}
+                            </button>
+                            <button class="btn btn-sm etiq-cate">
+                                {{prod.etiq_2}}
+                            </button>
+                        </td>
+                        <td data-label="Precio">${{prod.precio}}</td>
+                        <td data-label="Acciones">
+                            <button class="btn btn-danger btn-sm"
+                                (click)="deleteprod(prod._id)">
+                                Modificar
+                            </button>
+                            <button class="btn btn-danger btn-sm"
+                                (click)="deleteprod(prod._id)">
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-
-<!-- MODAL DE EDICION -->
-<app-modify-product
-    [producto]="productoSeleccionado"
-    (guardarCambios)="guardarCambios($event)">
-</app-modify-product>
-

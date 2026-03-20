@@ -1,58 +1,75 @@
-<div class="container-fluid py-4 align-items-center justify-content-center"
-    style="background-color: #97a5b6">
-    <div class="container align-items-center justify-content-center"
-        style="background-color: #97a5b6">
-        <h2 class="fs-1 fw-bold">Iniciar Sesión</h2>
+<div class="container mt-3 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-dark text-white text-center">
+                    <h4 class="fs-1 fw-bold">Iniciar Sesión</h4>
+                </div>
 
-        <form #formContact="ngForm" (ngSubmit)="processForm(formContact)">
-            <div class="mb-3">
-                <label class="form-label fw-bold">Correo Electrónico</label>
-                <input type="email"
-                    class="form-control"
-                    name="correo"
-                    ngModel
-                    required
-                    email
-                    placeholder="Ejemplo: clienteDiamante@gmail.com"
-                    #correo="ngModel">
-            </div>
-            <div *ngIf="correo.invalid && correo.touched" class="text-danger">
-                <small *ngIf="correo.errors?.['required']">
-                    *correo electrónico obligatorio
-                </small>
-                <small *ngIf="correo.errors?.['email']">
-                    *correo electrónico inválido
-                </small>
-            </div>
+                <div class="card-body">
+                    <form #formContact="ngForm" (ngSubmit)="processForm(formContact)">
 
-            <div class="mb-3">
-            <label class="form-label fw-bold">Contraseña</label>
-            <input type="password"
-                class="form-control"
-                name="clave"
-                ngModel
-                required
-                minlength="6"
-                placeholder="Ingrese su contraseña (favor de no compartirla)"
-                #clave="ngModel">
-            </div>
-            <div *ngIf="clave.invalid && clave.touched" class="text-danger">
-                <small *ngIf="clave.errors?.['required']">
-                    *contraseña obligatoría
-                </small>
-                <small *ngIf="clave.errors?.['minlength']">
-                    *contraseña inválida (mínimo 6 carácteres)
-                </small>
-            </div>
+                        <!-- Número Telefónico -->
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Número Telefónico</label>
 
-            <button class="btn" type="submit" style="background-color: #4894a7">
-                Iniciar sesión
-            </button>
-            <a class="btn text-decoration-underline" 
-                routerLink="/signup">
-                <small>Aún no tengo cuenta</small>
-            </a>
-        </form>
+                            <input
+                                type="text"
+                                class="form-control"
+                                name="telefono"
+                                ngModel
+                                required
+                                pattern="^[0-9]+$"
+                                #telefonoCtrl="ngModel"
+                                placeholder="Ingrese su número telefónico">
+
+                            <div *ngIf="telefonoCtrl.invalid && telefonoCtrl.touched" class="text-danger mt-1">
+                                <small *ngIf="telefonoCtrl.errors?.['required']">
+                                El número telefónico es obligatorio
+                                </small>
+
+                                <small *ngIf="telefonoCtrl.errors?.['pattern']">
+                                Solo se permiten números
+                                </small>
+                            </div>
+                        </div>
+
+                        <!--Contraseña-->
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Contraseña</label>
+
+                            <input
+                                type="password"
+                                class="form-control"
+                                name="password"
+                                ngModel
+                                required
+                                minlength="6"
+                                #passCtrl="ngModel"
+                                placeholder="Ingrese su contraseña">
+
+                            <div *ngIf="passCtrl.invalid && passCtrl.touched" class="text-danger mt-1">
+                                <small *ngIf="passCtrl.errors?.['required']">
+                                La contraseña es obligatoria
+                                </small>
+
+                                <small *ngIf="passCtrl.errors?.['minlength']">
+                                Debe tener mínimo 6 caracteres
+                                </small>
+                            </div>
+                        </div>
+
+                        <button class="btn" type="submit" style="background-color: #4894a7">
+                            Iniciar sesión
+                        </button>
+                        <a class="btn text-decoration-underline" 
+                            routerLink="/signup">
+                            <small>Aún no tengo cuenta</small>
+                        </a>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="modal fade" id="modalResult" tabindex="-1">
