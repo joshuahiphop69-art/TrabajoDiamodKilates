@@ -17,3 +17,8 @@
 
   transition: transform 0.3s ease;
 }
+
+.custom-table td,
+.custom-table th {
+  vertical-align: middle;
+}

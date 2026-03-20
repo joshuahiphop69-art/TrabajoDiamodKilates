@@ -10,6 +10,7 @@ import { Contact } from './pages/users/contact/contact';
 import { LogIn } from './pages/guest/log-in/log-in';
 import { SignUp } from './pages/guest/sign-up/sign-up';
 
+import { Carrito } from './pages/logged/carrito/carrito';
 import { Profile } from './pages/logged/profile/profile';
 import { Request } from './pages/admin/request/request';
 
@@ -27,6 +28,7 @@ export const routes: Routes = [
     { path: "login", component: LogIn },
     { path: "signup", component: SignUp },
 
+    { path: "carrito", component: Carrito },
     { path: "profile", component: Profile },
     { path: "request", component: Request },
 

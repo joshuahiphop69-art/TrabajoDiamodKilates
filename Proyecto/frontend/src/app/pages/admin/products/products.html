@@ -1,17 +1,12 @@
 <div class="container mt-4">
   <div class="card shadow-lg border-0">
-
     <div class="card-header bg-dark text-white">
       <h2 class="fs-3 fw-bold m-0">Listado de productos</h2>
     </div>
 
     <div class="card-body">
-
-      <!-- 🔥 Hace la tabla responsive en móvil -->
       <div class="table-responsive">
-
         <table class="table table-striped custom-table align-middle">
-
           <thead class="table-dark">
             <tr>
               <th>Nombre del producto</th>
@@ -25,13 +20,9 @@
 
           <tbody>
             <tr *ngFor="let prod of prods">
-
               <td>{{ prod.nombre }}</td>
-
               <td>{{ prod.material }}</td>
-
               <td>{{ prod.categoria }}</td>
-
               <td>
                 <span class="badge bg-secondary me-1">
                   {{ prod.etiq_1 }}
@@ -40,38 +31,32 @@
                   {{ prod.etiq_2 }}
                 </span>
               </td>
-
               <td class="fw-bold text-success">
                 ${{ prod.precio }}
               </td>
-
               <td class="text-center">
-
-                <!-- 🔥 Ahora sí editar es amarillo -->
-                <button 
+                <button
                   class="btn btn-warning btn-sm me-2"
-                  (click)="editprod(prod)"
-                >
+                  (click)="editprod(prod)">
                   Modificar
                 </button>
 
-                <!-- 🔥 Eliminar rojo -->
-                <button 
+                <button
                   class="btn btn-danger btn-sm"
-                  (click)="deleteprod(prod._id)"
-                >
+                  (click)="deleteprod(prod._id)">
                   Eliminar
                 </button>
-
               </td>
-
             </tr>
           </tbody>
-
         </table>
-
       </div>
-
     </div>
   </div>
 </div>
+
+<app-modify-product
+  [producto]="productoEnEdicion"
+  (guardarCambios)="guardarCambios($event)"
+  (cerrarModal)="cerrarModalEdicion()">
+</app-modify-product>
