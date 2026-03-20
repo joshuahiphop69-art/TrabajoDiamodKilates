@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { Product } from '../../models/product.model';
-import { CartService } from '../../services/cart.service';
-import { ProductCatalogService } from '../../services/product-catalog.service';
+import { Product } from '../../../models/product.model';
+import { CartService } from '../../../services/cart.service';
+import { ProductCatalogService } from '../../../services/product-catalog.service';
 
 @Component({
   selector: 'app-prod-extra',

@@ -2,7 +2,7 @@ export interface Product {
   id: string;
   nombre: string;
   precio: number;
+  categoria: string;
   imagen: string;
-  categoria: 'oro' | 'plata' | 'extra';
-  detalles: string[];
+  detalles: string[]; // 👈 ESTA ES LA CLAVE
 }
