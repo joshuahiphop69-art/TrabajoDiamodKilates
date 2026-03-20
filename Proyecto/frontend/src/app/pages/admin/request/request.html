@@ -1,0 +1,64 @@
+<section class="request-page">
+  <div class="request-layout">
+    <aside class="status-panel card border-0 shadow-sm">
+      <div class="card-body p-4">
+        <p class="panel-kicker mb-2">Gestión de pedidos</p>
+        <h1 class="panel-title">Estados</h1>
+
+        <div class="status-actions">
+          <button
+            type="button"
+            class="status-button"
+            *ngFor="let estado of estados"
+            [class.active]="estadoActivo === estado"
+            (click)="seleccionarEstado(estado)">
+            {{ estado }}
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <div class="orders-panel card border-0 shadow-sm">
+      <div class="card-body p-4 p-lg-5">
+        <div class="orders-header">
+          <div>
+            <p class="orders-kicker mb-2">Listado visible</p>
+            <h2 class="orders-title mb-0">{{ estadoActivo }}</h2>
+          </div>
+          <span class="orders-count">
+            {{ pedidosFiltrados.length }} pedidos
+          </span>
+        </div>
+
+        <div class="orders-table" *ngIf="pedidosFiltrados.length; else emptyState">
+          <article class="order-card order-head">
+            <span>Folio</span>
+            <span>Cliente</span>
+            <span>ID Cliente</span>
+            <span>Productos</span>
+            <span>Total</span>
+            <span>Fecha</span>
+          </article>
+
+          <article class="order-card" *ngFor="let pedido of pedidosFiltrados">
+            <span class="order-folio">{{ pedido.folio }}</span>
+            <span>{{ pedido.cliente }}</span>
+            <span>{{ pedido.clienteId }}</span>
+            <span>{{ pedido.productos }}</span>
+            <span class="order-total">${{ pedido.total | number }}</span>
+            <span>{{ pedido.fecha }}</span>
+          </article>
+        </div>
+
+        <ng-template #emptyState>
+          <div class="empty-state">
+            <h3 class="empty-title">No hay pedidos en este estado</h3>
+            <p class="empty-copy mb-0">
+              Cuando existan pedidos {{ estadoActivo.toLowerCase() }}, se mostrarán aquí.
+            </p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</section>

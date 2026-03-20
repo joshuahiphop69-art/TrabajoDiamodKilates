@@ -1,0 +1,66 @@
+<section class="cart-page">
+  <div class="cart-layout">
+    <div class="cart-products card shadow-sm border-0">
+      <div class="card-body p-4 p-lg-5">
+        <div class="cart-header">
+          <div>
+            <p class="cart-eyebrow mb-2">Carrito de compras</p>
+            <h1 class="cart-title mb-0">Productos agregados</h1>
+          </div>
+          <span class="cart-count">{{ productos.length }} productos</span>
+        </div>
+
+        <div class="cart-list" *ngIf="productos.length; else emptyCart">
+          <article class="product-card" *ngFor="let producto of productos">
+            <div class="product-info">
+              <p class="product-label mb-1">Nombre del producto</p>
+              <h2 class="product-name mb-0">{{ producto.nombre }}</h2>
+            </div>
+
+            <div class="product-price-block">
+              <p class="product-label mb-1">Precio</p>
+              <p class="product-price mb-0">${{ producto.precio | number }}</p>
+            </div>
+
+            <button
+              type="button"
+              class="btn remove-button"
+              (click)="eliminarDelCarrito(producto.id)">
+              Eliminar del carrito
+            </button>
+          </article>
+        </div>
+
+        <ng-template #emptyCart>
+          <div class="empty-state">
+            <h2 class="empty-title">Tu carrito está vacío</h2>
+            <p class="empty-copy mb-0">
+              Agrega productos para verlos listados aquí.
+            </p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+    <aside class="cart-actions card shadow-sm border-0">
+      <div class="card-body p-4">
+        <p class="actions-eyebrow mb-2">Acciones rápidas</p>
+        <h2 class="actions-title">Siguiente paso</h2>
+
+        <div class="actions-list">
+          <button type="button" class="btn action-button secondary-action">
+            Historial de compras
+          </button>
+
+          <a routerLink="/catalogo" class="btn action-button primary-action">
+            Seguir comprando
+          </a>
+
+          <button type="button" class="btn action-button accent-action">
+            Finalizar pedido
+          </button>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
