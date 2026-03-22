@@ -5,13 +5,14 @@
         </div>
         <div class="card-body">
             <form #productoForm="ngForm" (ngSubmit)="guardarProducto(productoForm)">
+
                 <!-- Nombre -->
                 <div class="mb-3">
                     <label class="form-label fw-bold">Nombre del producto</label>
                     <input type="text"
                         class="form-control"
                         name="nombre"
-                        ngModel="producto.nombre"
+                        [(ngModel)]="producto.nombre"
                         required
                         minlength="3"
                         #nombreCtrl="ngModel"
@@ -25,49 +26,66 @@
                         </small>
                     </div>
                 </div>
+
                 <!-- Precio -->
                 <div class="mb-3">
                     <label class="form-label fw-bold">Precio</label>
                     <input type="number"
                         class="form-control"
                         name="precio"
-                        ngModel="producto.precio"
+                        [(ngModel)]="producto.precio"
                         required
                         min="1"
                         #precioCtrl="ngModel"
                         placeholder="Ingrese el precio">
                     <div *ngIf="precioCtrl.invalid && precioCtrl.touched" class="text-danger">
                         <small *ngIf="precioCtrl.errors?.['required']">
-                        El precio es obligatorio
+                            El precio es obligatorio
                         </small>
                     </div>
                 </div>
-                <!-- Categoria -->
+
+                <!-- Categoria tipo filtro -->
                 <div class="mb-3">
                     <label class="form-label fw-bold">Categoría</label>
-                    <select class="form-select"
-                        name="categoria"
-                        ngModel="producto.categoria"
-                        required
-                        #categoriaCtrl="ngModel">
-                    <option value="">Seleccione una categoría</option>
-                    <option value="Oro">Oro</option>
-                    <option value="Plata">Plata</option>
-                    <option value="Otros">Otros</option>
-                    </select>
-                    <div *ngIf="categoriaCtrl.invalid && categoriaCtrl.touched" class="text-danger">
-                        <small>
-                        Debe seleccionar una categoría
-                        </small>
+
+                    <div class="d-flex gap-2">
+
+                        <button type="button"
+                            class="btn"
+                            [ngClass]="producto.categoria === 'Oro' ? 'btn-dark' : 'btn-outline-dark'"
+                            (click)="seleccionarCategoria('Oro')">
+                            Oro
+                        </button>
+
+                        <button type="button"
+                            class="btn"
+                            [ngClass]="producto.categoria === 'Plata' ? 'btn-dark' : 'btn-outline-dark'"
+                            (click)="seleccionarCategoria('Plata')">
+                            Plata
+                        </button>
+
+                        <button type="button"
+                            class="btn"
+                            [ngClass]="producto.categoria === 'Otros' ? 'btn-dark' : 'btn-outline-dark'"
+                            (click)="seleccionarCategoria('Otros')">
+                            Otros
+                        </button>
+
+                    </div>
+
+                    <div *ngIf="!producto.categoria" class="text-danger mt-1">
+                        <small>Debe seleccionar una categoría</small>
                     </div>
                 </div>
+
                 <!-- Accesorio -->
                 <div class="mb-3">
                     <label class="form-label fw-bold">Tipo de accesorio</label>
                     <input type="text"
                         class="form-control"
                         name="accesorio"
-                        ngModel="producto.accesorio"
+                        [(ngModel)]="producto.accesorio"
                         required
                         #accesorioCtrl="ngModel"
                         placeholder="Ejemplo: Collar, Anillo, Pulsera">
@@ -77,13 +95,14 @@
                         </small>
                     </div>
                 </div>
+
                 <!-- Existencias -->
                 <div class="mb-3">
                     <label class="form-label fw-bold">Existencias</label>
                     <input type="number"
                         class="form-control"
                         name="existencias"
-                        ngModel="producto.existencias"
+                        [(ngModel)]="producto.existencias"
                         required
                         min="0"
                         #existCtrl="ngModel"
@@ -94,6 +113,38 @@
                         </small>
                     </div>
                 </div>
+
+                <!-- Imagen -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Imagen del producto</label>
+
+                    <div class="border border-2 border-secondary rounded p-4 text-center"
+                        (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event)">
+
+                        <p>Arrastra una imagen aquí o haz clic para seleccionar</p>
+
+                        <input type="file"
+                            accept="image/*"
+                            (change)="onFileSelected($event)"
+                            hidden
+                            #fileInput>
+
+                        <button type="button"
+                            class="btn btn-outline-primary mt-2"
+                            (click)="fileInput.click()">
+                            Seleccionar imagen
+                        </button>
+
+                        <!-- Preview -->
+                        <div *ngIf="previewImage" class="mt-3">
+                            <img [src]="previewImage"
+                                class="img-fluid rounded"
+                                style="max-height: 200px;">
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Boton -->
                 <div class="d-grid">
                     <button type="submit"
@@ -102,8 +153,8 @@
                         Guardar Producto
                     </button>
                 </div>
+
             </form>
         </div>
     </div>
 </div>
-
