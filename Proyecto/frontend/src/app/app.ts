@@ -12,5 +12,15 @@ import { Profile } from "./pages/logged/profile/profile";
   styleUrl: './app.css'
 })
 export class App {
+  private readonly themeKey = 'app_theme';
   protected readonly title = signal('frontend');
+
+  constructor() {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const savedTheme = localStorage.getItem(this.themeKey);
+    document.body.classList.toggle('dark-mode', savedTheme === 'dark');
+  }
 }

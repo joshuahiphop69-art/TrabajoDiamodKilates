@@ -16,7 +16,7 @@
                         aria-expanded="false">
                         <strong>Catálogo</strong>
                     </a>
-                    <ul class="dropdown-menu" style="background-color: #1d1d1d;">
+                    <ul class="dropdown-menu app-dropdown-menu">
                         <li>
                             <a class="dropdown-item text-white"
                                 routerLink="/catalogo">
@@ -67,13 +67,6 @@
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
-                <a class="navbar-brand" *ngIf="rol=='logged'">
-                    <img src="images/logo_igneous_code.png" 
-                        alt="Image Invitado"
-                        width="30" 
-                        height="30"
-                        class="d-inline-block rounded-circle">
-                </a>
                 <li class="nav-item" *ngIf="rol=='guest'">
                     <a class="nav-link active text-white" 
                         aria-current="page" 
@@ -89,16 +82,28 @@
                     </a>
                 </li>
                 <li class="nav-item" *ngIf="rol=='admin'">
-                    <a class="nav-link text-white" 
-                        (click)="openProfile()">
+                    <button
+                        type="button"
+                        class="profile-trigger nav-link text-white"
+                        (click)="openProfile($event)">
+                        <img
+                            src="images/logo_komi.gif"
+                            alt="Avatar"
+                            class="profile-trigger-avatar">
                         <strong>Perfil</strong>
-                    </a>
+                    </button>
                 </li>
                 <li class="nav-item" *ngIf="rol=='logged'">
-                    <a class="nav-link text-white" 
-                        (click)="openProfile()">
+                    <button
+                        type="button"
+                        class="profile-trigger nav-link text-white"
+                        (click)="openProfile($event)">
+                        <img
+                            src="images/logo_komi.gif"
+                            alt="Avatar"
+                            class="profile-trigger-avatar">
                         <strong>Perfil</strong>
-                    </a>
+                    </button>
                 </li>
             </ul>
         </div>

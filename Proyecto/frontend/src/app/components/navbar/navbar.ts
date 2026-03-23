@@ -3,8 +3,6 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Perfiles } from '../../services/perfiles';
 
-declare var bootstrap: any;
-
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -28,10 +26,9 @@ export class Navbar {
     this.rol = 'guest';
   }
 
-  openProfile() {
-    const panel = new bootstrap.Offcanvas(
-    document.getElementById('profilePanel')
-  );
-  panel.show();
+  openProfile(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    window.dispatchEvent(new CustomEvent('toggle-profile-menu'));
   }
 }

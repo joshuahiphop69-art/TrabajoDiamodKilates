@@ -1,16 +1,42 @@
-.dropdown-item {
-  transition: all 0.3s ease;
+.navbar {
+  background: transparent;
 }
 
-.dropdown-item:hover {
-  color: black !important;
-  background-color: rgb(209, 209, 209) !important;
+.nav-link {
+  color: var(--navbar-text) !important;
 }
 
 .navbar-toggler {
-  border-color: white; /* borde del botón */
+  border-color: var(--border-color);
 }
 
 .navbar-toggler-icon {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+.app-dropdown-menu {
+  background: var(--dropdown-bg) !important;
+}
+
+.profile-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  background: transparent;
+  padding: 8px 12px;
+  border-radius: 999px;
+  transition: background-color 0.2s ease;
+}
+
+.profile-trigger:hover {
+  background-color: var(--navbar-hover);
+}
+
+.profile-trigger-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-color);
 }

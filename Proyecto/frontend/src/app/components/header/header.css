@@ -1,13 +1,13 @@
 .header-container {
-  background: linear-gradient(135deg, #0b2c4d, #052850);
-  color: white;
+  background: var(--header-bg);
+  color: var(--header-text);
 }
 
 .header-logo {
   width: 90px;
   height: 90px;
   object-fit: cover;
-  border: 3px solid rgba(255, 255, 255, 0.3);
+  border: 3px solid var(--border-color);
 }
 
 .brand-title {
@@ -17,7 +17,7 @@
 }
 
 .brand-title span {
-  color: #d4af37; /* dorado elegante */
+  color: var(--gold-accent);
 }
 
 .brand-subtitle {

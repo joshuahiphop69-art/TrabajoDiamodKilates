@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, ElementRef, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { Perfiles } from '../../../services/perfiles';
-
-declare var bootstrap: any;
 
 @Component({
   selector: 'app-profile',
@@ -13,68 +11,108 @@ declare var bootstrap: any;
   styleUrl: './profile.css',
 })
 export class Profile {
+  private readonly themeKey = 'app_theme';
 
   nombreUsuario = '';
-  fotoUsuario = '';
-  seccion: 'datos' | 'seguridad' | null = null;
+  fotoUsuario = 'images/logo_komi.gif';
+  menuAbierto = false;
+  mostrarPerfil = false;
+  temaOscuro = false;
 
   constructor(
     private auth: Perfiles,
-    private router: Router
+    private router: Router,
+    private elementRef: ElementRef<HTMLElement>
   ) {
-
-    // 🔥 Se actualiza automáticamente cuando cambia login/logout
     this.auth.role$.subscribe(() => {
       this.loadUser();
     });
 
-    // 🔥 Carga inicial
     this.loadUser();
+    this.initTheme();
   }
 
   private loadUser() {
     const user = this.auth.getUser();
 
     if (user) {
-      this.nombreUsuario = user.nombre;
-      this.fotoUsuario = user.foto;
-    } else {
-      this.nombreUsuario = '';
-      this.fotoUsuario = '';
+      this.nombreUsuario = user.nombre || 'Usuario';
+      this.fotoUsuario = 'images/logo_komi.gif';
+      return;
+    }
+
+    this.nombreUsuario = '';
+    this.fotoUsuario = 'images/logo_komi.gif';
+    this.closeMenu();
+  }
+
+  private initTheme() {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    this.temaOscuro = localStorage.getItem(this.themeKey) === 'dark';
+    document.body.classList.toggle('dark-mode', this.temaOscuro);
+  }
+
+  @HostListener('window:toggle-profile-menu')
+  onToggleProfileMenu() {
+    if (!this.nombreUsuario) {
+      return;
+    }
+
+    this.menuAbierto = !this.menuAbierto;
+
+    if (!this.menuAbierto) {
+      this.mostrarPerfil = false;
     }
   }
 
-  setSeccion(sec: 'datos' | 'seguridad') {
-    this.seccion = sec;
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    if (!this.menuAbierto) {
+      return;
+    }
+
+    const target = event.target as Node | null;
+
+    if (target && !this.elementRef.nativeElement.contains(target)) {
+      this.closeMenu();
+    }
   }
 
-  toggleDarkMode() {
-    document.body.classList.toggle('bg-dark');
-    document.body.classList.toggle('text-white');
+  @HostListener('document:keydown.escape')
+  onEscape() {
+    this.closeMenu();
+  }
+
+  toggleProfileSection(event: MouseEvent) {
+    event.stopPropagation();
+    this.mostrarPerfil = !this.mostrarPerfil;
+  }
+
+  toggleDarkMode(event?: MouseEvent) {
+    event?.stopPropagation();
+
+    this.temaOscuro = !this.temaOscuro;
+    document.body.classList.toggle('dark-mode', this.temaOscuro);
+
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(this.themeKey, this.temaOscuro ? 'dark' : 'light');
+    }
   }
 
   logout() {
-
-    const panel = bootstrap.Offcanvas.getInstance(
-      document.getElementById('profilePanel')
-    );
-
-    if (panel) {
-      panel.hide();
-    }
-
+    this.closeMenu();
     this.auth.logout();
 
-    // 🔥 Espera que cierre animación y navega
     setTimeout(() => {
       this.router.navigate(['/']);
-    }, 200);
+    }, 150);
   }
 
-  openPanel() {
-    const panel = new bootstrap.Offcanvas(
-      document.getElementById('profilePanel')
-    );
-    panel.show();
+  closeMenu() {
+    this.menuAbierto = false;
+    this.mostrarPerfil = false;
   }
 }
