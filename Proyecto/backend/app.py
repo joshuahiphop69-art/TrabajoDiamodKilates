@@ -1,9 +1,19 @@
+from pathlib import Path
+from uuid import uuid4
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from werkzeug.utils import secure_filename
+
 from models.product import get_all_prods, create_prod, update_prod, delete_prod
 
 app = Flask(__name__)
 CORS(app)
+
+BASE_DIR = Path(__file__).resolve().parent
+IMAGES_DIR = BASE_DIR.parent / "frontend" / "public" / "images"
+MAX_IMAGES = 4
+ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".webp"}
 
 @app.route("/")
 def inicio():
@@ -29,6 +39,33 @@ def update_prod_route(id):
     data = request.json
     result = update_prod(id, data)
     return jsonify(result)
+
+@app.route('/upload-product-images', methods=['POST'])
+def upload_product_images():
+    files = request.files.getlist('images')
+
+    if not files:
+        return jsonify({"message": "No se recibieron imágenes"}), 400
+
+    if len(files) > MAX_IMAGES:
+        return jsonify({"message": "Solo se permiten hasta 4 imágenes"}), 400
+
+    IMAGES_DIR.mkdir(parents=True, exist_ok=True)
+    saved_paths = []
+
+    for file in files:
+        filename = secure_filename(file.filename or "")
+        extension = Path(filename).suffix.lower()
+
+        if not extension or extension not in ALLOWED_EXTENSIONS:
+            return jsonify({"message": "Formato de imagen no permitido"}), 400
+
+        new_filename = f"{uuid4().hex}{extension}"
+        destination = IMAGES_DIR / new_filename
+        file.save(destination)
+        saved_paths.append(f"images/{new_filename}")
+
+    return jsonify({"paths": saved_paths}), 201
 
 @app.route('/list-products/<id>', methods=['DELETE'])
 def delete_prod_route(id):
