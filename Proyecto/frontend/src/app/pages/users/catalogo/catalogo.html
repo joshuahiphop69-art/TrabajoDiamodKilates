@@ -1,152 +1,65 @@
-<div class="container-fluid py-4" style="background-color: #97a5b6">
-
-  <h3 class="fs-1 fw-bold text-center mb-4">
+<div class="container-fluid py-4 theme-page-light">
+  <h3 class="catalog-title fs-1 fw-bold text-center mb-4">
     <strong>Catálogo</strong>
   </h3>
 
   <div class="row">
-
-    <!-- 🔥 IZQUIERDA: PRODUCTOS -->
     <section class="col-lg-9 col-md-8">
+      <div *ngIf="cargando" class="catalog-message">
+        Cargando productos...
+      </div>
 
-      <div class="row">
+      <div *ngIf="error" class="catalog-message error-message">
+        {{ error }}
+      </div>
 
-        <!-- CARD 1 -->
-        <div class="col-md-6 col-xl-4 mb-4">
-          <div class="card h-100 shadow">
-            <img src="images/img_w1.jpg"
-              class="card-img-top"
-              style="height:300px; object-fit:cover;">
+      <div class="row" *ngIf="!cargando && !error">
+        <div class="col-md-6 col-xl-4 mb-4" *ngFor="let producto of productosFiltrados">
+          <div class="card h-100 shadow product-card">
+            <img
+              [src]="getImagenProducto(producto)"
+              class="card-img-top product-image"
+              [alt]="producto.nombre">
+
             <div class="card-body">
-              <h5 class="fw-bold">Poster: Marin Kitagawa Evento LoveHotel</h5>
-              <p class="fw-bold text-success">Precio: $1,000,000</p>
-              <ul>
-                <li>Es preciosa</li>
-                <li>Brilla de noche</li>
-                <li>Mide 2m x 4m</li>
-              </ul>
+              <h5 class="fw-bold product-name">{{ producto.nombre }}</h5>
+              <p class="fw-bold text-success">Precio: ${{ producto.precio }}</p>
+              <p class="product-stock mb-0">Stock: {{ getStock(producto) }}</p>
             </div>
           </div>
         </div>
 
-        <!-- CARD 2 -->
-        <div class="col-md-6 col-xl-4 mb-4">
-          <div class="card h-100 shadow">
-            <img src="images/img_w2.png"
-              class="card-img-top"
-              style="height:300px; object-fit:cover;">
-            <div class="card-body">
-              <h5 class="fw-bold">Poster: Mambo Fondito Bomnito</h5>
-              <p class="fw-bold text-success">Precio: $500,000</p>
-              <ul>
-                <li>Es Matikanetanhauser</li>
-                <li>*inserte momo Manbo singing</li>
-                <li>Mide 3m x 3.5m</li>
-              </ul>
-            </div>
+        <div class="col-12" *ngIf="!productosFiltrados.length">
+          <div class="catalog-message">
+            No hay productos que coincidan con los filtros seleccionados.
           </div>
         </div>
-
-        <!-- CARD 3 -->
-        <div class="col-md-6 col-xl-4 mb-4">
-          <div class="card h-100 shadow">
-            <img src="images/img_w3.jpg"
-              class="card-img-top"
-              style="height:300px; object-fit:cover;">
-            <div class="card-body">
-              <h5 class="fw-bold">Poster: Itsuki Otoño La Besto</h5>
-              <p class="fw-bold text-success">Precio: $500,000</p>
-              <ul>
-                <li>La mejor quintilliza</li>
-                <li>Es de otoño rojizo</li>
-                <li>Mide 3m x 5m</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD 4 -->
-        <div class="col-md-6 col-xl-4 mb-4">
-          <div class="card h-100 shadow">
-            <img src="images/img_w4.jpg"
-              class="card-img-top"
-              style="height:300px; object-fit:cover;">
-            <div class="card-body">
-              <h5 class="fw-bold">Poster: Maruzensky La Mejor Uma</h5>
-              <p class="fw-bold text-success">Precio: $10,000,000</p>
-              <ul>
-                <li>LM-2500-PM</li>
-                <li>Brilla de noche</li>
-                <li>La papeadora de los 70s</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- CARD 5 -->
-        <div class="col-md-6 col-xl-4 mb-4">
-          <div class="card h-100 shadow">
-            <img src="images/img_w5.jpg"
-              class="card-img-top"
-              style="height:300px; object-fit:cover;">
-            <div class="card-body">
-              <h5 class="fw-bold">Poster: Marin Kitagawa Te Mira We</h5>
-              <p class="fw-bold text-success">Precio: $1,000,000</p>
-              <ul>
-                <li>Es preciosa</li>
-                <li>Te mira tierno</li>
-                <li>Mide 2m x 4m</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
       </div>
     </section>
 
-    <!-- 🔥 DERECHA: FILTROS -->
     <aside class="col-lg-3 col-md-4 mt-4 mt-md-0">
-
       <div class="card shadow">
-
-        <div class="card-header text-white"
-          style="background-color:#004394">
+        <div class="card-header text-white theme-header-dark">
           Filtros
         </div>
 
         <div class="card-body">
-
-          <div class="form-check mb-2">
-            <input class="form-check-input" type="checkbox">
-            <label class="form-check-label">
-              Anillos
+          <div class="form-check mb-2" *ngFor="let filtro of filtros">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [id]="filtro"
+              [(ngModel)]="filtrosSeleccionados[filtro]">
+            <label class="form-check-label" [for]="filtro">
+              {{ filtro }}
             </label>
           </div>
 
-          <div class="form-check mb-2">
-            <input class="form-check-input" type="checkbox">
-            <label class="form-check-label">
-              Cadenas
-            </label>
-          </div>
-
-          <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox">
-            <label class="form-check-label">
-              Pulseras
-            </label>
-          </div>
-
-          <button class="btn w-100 text-white"
-            style="background-color:#004394">
+          <button class="btn btn-primary w-100 mt-3" (click)="aplicarFiltros()">
             Aplicar filtros
           </button>
-
         </div>
-
       </div>
-
     </aside>
-
   </div>
 </div>
