@@ -3,11 +3,6 @@ body{
   flex-direction: column;
 }
 
-.app-shell {
-  background: var(--footer-bg);
-  color: var(--footer-text);
-}
-
 app-root{
   min-height: 100vh;
   display: flex;
@@ -16,6 +11,9 @@ app-root{
 
 .main-content{
   flex: 1;
-  background: var(--bg-color);
-  color: var(--text-color);
+  background-color: var(--theme-light);
+}
+
+.top-shell {
+  background-color: var(--theme-dark);
 }

@@ -1,13 +1,13 @@
 .header-container {
-  background: var(--header-bg);
-  color: var(--header-text);
+  background: linear-gradient(135deg, var(--theme-dark-strong), var(--theme-dark));
+  color: white;
 }
 
 .header-logo {
   width: 90px;
   height: 90px;
   object-fit: cover;
-  border: 3px solid var(--border-color);
+  border: 3px solid rgba(255, 255, 255, 0.3);
 }
 
 .brand-title {
@@ -17,7 +17,7 @@
 }
 
 .brand-title span {
-  color: var(--gold-accent);
+  color: var(--theme-light);
 }
 
 .brand-subtitle {

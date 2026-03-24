@@ -1,12 +1,13 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { prod } from '../../../services/product';
 import { ModifyProduct } from '../modify-product/modify-product';
 
 @Component({
   selector: 'app-listado',
   standalone: true,
-  imports: [CommonModule, ModifyProduct],
+  imports: [CommonModule, RouterLink, ModifyProduct],
   templateUrl: './products.html',
   styleUrl: './products.css',
 })
@@ -14,6 +15,8 @@ export class Products implements OnInit {
   prods: any[] = [];
   productoEnEdicion: any = null;
   guardandoCambios = false;
+  mostrarModalEliminar = false;
+  productoAEliminar: string | null = null;
 
   constructor(
     private prodService: prod,
@@ -37,17 +40,30 @@ export class Products implements OnInit {
   }
 
   deleteprod(id: string) {
-    if (confirm('¿Seguro que deseas eliminar este producto?')) {
-      this.prodService.deleteprod(id).subscribe({
-        next: () => {
-          this.prods = this.prods.filter((p) => p._id !== id);
-          this.cd.detectChanges();
-        },
-        error: (error) => {
-          console.error('Error al eliminar:', error);
-        }
-      });
+    this.productoAEliminar = id;
+    this.mostrarModalEliminar = true;
+  }
+
+  cerrarModalEliminar() {
+    this.productoAEliminar = null;
+    this.mostrarModalEliminar = false;
+  }
+
+  confirmarEliminacion() {
+    if (!this.productoAEliminar) {
+      return;
     }
+
+    this.prodService.deleteprod(this.productoAEliminar).subscribe({
+      next: () => {
+        this.cerrarModalEliminar();
+        window.location.reload();
+      },
+      error: (error) => {
+        console.error('Error al eliminar:', error);
+        this.cerrarModalEliminar();
+      }
+    });
   }
 
   editprod(prodActual: any) {

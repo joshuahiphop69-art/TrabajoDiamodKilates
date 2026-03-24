@@ -8,8 +8,6 @@
 
                 <div class="card-body">
                     <form #formContact="ngForm" (ngSubmit)="processForm(formContact)">
-
-                        <!-- Número Telefónico -->
                         <div class="mb-3">
                             <label class="form-label fw-bold">Número Telefónico</label>
 
@@ -34,7 +32,6 @@
                             </div>
                         </div>
 
-                        <!--Contraseña-->
                         <div class="mb-3">
                             <label class="form-label fw-bold">Contraseña</label>
 
@@ -59,11 +56,10 @@
                             </div>
                         </div>
 
-                        <button class="btn theme-accent-button" type="submit">
+                        <button class="btn btn-primary" type="submit">
                             Iniciar sesión
                         </button>
-                        <a class="btn text-decoration-underline" 
-                            routerLink="/signup">
+                        <a class="btn text-decoration-underline" routerLink="/signup">
                             <small>Aún no tengo cuenta</small>
                         </a>
                     </form>
@@ -90,4 +86,3 @@
         </div>
     </div>
 </div>
-

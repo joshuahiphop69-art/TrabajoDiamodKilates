@@ -1,62 +1,126 @@
-<div class="container mt-4">
-  <div class="card shadow-lg border-0">
-    <div class="card-header bg-dark text-white">
-      <h2 class="fs-3 fw-bold m-0">Listado de productos</h2>
-    </div>
+<section class="products-page">
+  <div class="products-layout">
+    <aside class="admin-panel">
+      <div class="admin-panel-body">
+        <p class="panel-kicker mx-4">Administración de Productos</p>
 
-    <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-striped custom-table align-middle">
-          <thead class="table-dark">
-            <tr>
-              <th>Nombre del producto</th>
-              <th>Catálogo</th>
-              <th>Tipo de accesorio</th>
-              <th>Etiquetas</th>
-              <th>Precio</th>
-              <th class="text-center">Acciones</th>
-            </tr>
-          </thead>
+        <div class="panel-actions">
+          <a routerLink="/products" class="panel-button active">
+            Listado
+          </a>
+          <a routerLink="/create-stock" class="panel-button">
+            Crear producto
+          </a>
+          <a routerLink="/request" class="panel-button">
+            Administrar pedidos
+          </a>
+        </div>
+      </div>
+    </aside>
 
-          <tbody>
-            <tr *ngFor="let prod of prods">
-              <td>{{ prod.nombre }}</td>
-              <td>{{ prod.material }}</td>
-              <td>{{ prod.categoria }}</td>
-              <td>
-                <span class="badge bg-secondary me-1">
-                  {{ prod.etiq_1 }}
-                </span>
-                <span class="badge bg-info text-dark">
-                  {{ prod.etiq_2 }}
-                </span>
-              </td>
-              <td class="fw-bold text-success">
-                ${{ prod.precio }}
-              </td>
-              <td class="text-center">
-                <button
-                  class="btn btn-warning btn-sm me-2"
-                  (click)="editprod(prod)">
-                  Modificar
-                </button>
+    <div class="products-panel">
+      <div class="products-panel-body">
+        <div class="products-header">
+          <div>
+            <h2 class="products-title mb-0">LISTADO DE PRODUCTOS</h2>
+          </div>
+          <span class="products-count">
+            {{ prods.length }} productos
+          </span>
+        </div>
 
-                <button
-                  class="btn btn-danger btn-sm"
-                  (click)="deleteprod(prod._id)">
-                  Eliminar
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="products-table border-1" *ngIf="prods.length; else emptyState">
+          <article class="product-row product-head">
+            <span>Nombre</span>
+            <span>Categorías</span>
+            <span>Precio</span>
+            <span>Stock</span>
+            <span>Acciones</span>
+          </article>
+
+          <article class="product-row" *ngFor="let prod of prods">
+            <span class="product-name">{{ prod.nombre }}</span>
+
+            <div class="product-tags">
+              <span class="badge bg-secondary me-1">
+                {{ prod.material }}
+              </span>
+              <span class="badge bg-info text-dark me-1">
+                {{ prod.categoria }}
+              </span>
+              <span class="badge bg-secondary me-1" *ngIf="prod.etiq_1">
+                {{ prod.etiq_1 }}
+              </span>
+              <span class="badge bg-info text-dark me-1" *ngIf="prod.etiq_2">
+                {{ prod.etiq_2 }}
+              </span>
+              <span class="badge bg-secondary me-1" *ngIf="prod.etiq_3">
+                {{ prod.etiq_3 }}
+              </span>
+              <span class="badge bg-info text-dark me-1" *ngIf="prod.etiq_4">
+                {{ prod.etiq_4 }}
+              </span>
+              <span class="badge bg-secondary" *ngIf="prod.etiq_5">
+                {{ prod.etiq_5 }}
+              </span>
+            </div>
+
+            <span class="product-price">${{ prod.precio }}</span>
+            <span class="product-stock">{{ prod.stock || prod.existencias || 0 }}</span>
+
+            <div class="product-actions">
+              <button
+                class="btn btn-warning btn-sm"
+                (click)="editprod(prod)">
+                Modificar
+              </button>
+
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="deleteprod(prod._id)">
+                Eliminar
+              </button>
+            </div>
+          </article>
+        </div>
+
+        <ng-template #emptyState>
+          <div class="empty-state">
+            <h3 class="empty-title">No hay productos registrados</h3>
+            <p class="empty-copy mb-0">
+              Cuando agregues productos nuevos, aparecerán en este listado.
+            </p>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>
-</div>
+</section>
 
 <app-modify-product
   [producto]="productoEnEdicion"
   (guardarCambios)="guardarCambios($event)"
   (cerrarModal)="cerrarModalEdicion()">
 </app-modify-product>
+
+<div class="delete-modal-shell" *ngIf="mostrarModalEliminar">
+  <div class="delete-modal-card">
+    <div class="delete-modal-header">
+      <h5 class="mb-0">Confirmar eliminación</h5>
+      <button type="button" class="btn-close" (click)="cerrarModalEliminar()"></button>
+    </div>
+
+    <div class="delete-modal-body">
+      <p class="mb-0">¿Seguro que deseas eliminar este producto?</p>
+    </div>
+
+    <div class="delete-modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="cerrarModalEliminar()">
+        Cancelar
+      </button>
+      <button type="button" class="btn btn-danger" (click)="confirmarEliminacion()">
+        Eliminar
+      </button>
+    </div>
+  </div>
+</div>

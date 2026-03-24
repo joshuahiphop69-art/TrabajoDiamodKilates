@@ -1,12 +1,25 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
+        <div class="collapse navbar-collapse align-items-center" id="navbarNavDropdown">
+            <ul class="navbar-nav navbar-left-links">
                 <li class="nav-item">
                     <a class="nav-link active text-white" 
                         aria-current="page" 
                         routerLink="/">
-                        <strong>Inicio</strong>
+                        <div class="d-flex align-items-center justify-content-center flex-column flex-md-row text-center text-md-start gap-2">
+                            <img 
+                                src="https://i.pinimg.com/originals/20/51/90/20519031f728ea61d79dc6a2542952b5.gif"
+                                alt="Logo Tienda"
+                                class="header-logo rounded-circle">
+                            <div>
+                                <h1 class="brand-title m-0">
+                                DELUXE <span>BUJOU</span>
+                                </h1>
+                                <p class="brand-subtitle m-0">
+                                Joyería fina & exclusividad
+                                </p>
+                            </div>
+                        </div>
                     </a>
                 </li>
                 <li class="nav-item dropdown">
@@ -16,11 +29,11 @@
                         aria-expanded="false">
                         <strong>Catálogo</strong>
                     </a>
-                    <ul class="dropdown-menu app-dropdown-menu">
+                    <ul class="dropdown-menu" style="background-color: #1d1d1d;">
                         <li>
                             <a class="dropdown-item text-white"
                                 routerLink="/catalogo">
-                                Todos los accesorios
+                                Explorar catálogo
                             </a>
                         </li>
                         <li>
@@ -40,13 +53,6 @@
                 <li class="nav-item" *ngIf="rol=='admin'">
                     <a class="nav-link active text-white" 
                         aria-current="page" 
-                        routerLink="/request">
-                        <strong>Listado de Pedidos</strong>
-                    </a>
-                </li>
-                <li class="nav-item" *ngIf="rol=='admin'">
-                    <a class="nav-link active text-white" 
-                        aria-current="page" 
                         routerLink="/products">
                         <strong>Administración</strong>
                     </a>
@@ -55,7 +61,7 @@
                     <a class="nav-link active text-white" 
                         aria-current="page" 
                         routerLink="/carrito">
-                        <strong>Compras y Pedidos</strong>
+                        <strong>Compras</strong>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -66,7 +72,7 @@
                     </a>
                 </li>
             </ul>
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto navbar-right-links">
                 <li class="nav-item" *ngIf="rol=='guest'">
                     <a class="nav-link active text-white" 
                         aria-current="page" 
@@ -81,28 +87,26 @@
                         <strong>Registrarse</strong>
                     </a>
                 </li>
-                <li class="nav-item" *ngIf="rol=='admin'">
-                    <button
-                        type="button"
-                        class="profile-trigger nav-link text-white"
-                        (click)="openProfile($event)">
-                        <img
-                            src="images/logo_komi.gif"
-                            alt="Avatar"
-                            class="profile-trigger-avatar">
-                        <strong>Perfil</strong>
-                    </button>
-                </li>
                 <li class="nav-item" *ngIf="rol=='logged'">
                     <button
                         type="button"
-                        class="profile-trigger nav-link text-white"
-                        (click)="openProfile($event)">
-                        <img
-                            src="images/logo_komi.gif"
-                            alt="Avatar"
-                            class="profile-trigger-avatar">
-                        <strong>Perfil</strong>
+                        class="profile-trigger"
+                        (click)="openProfile()"
+                        aria-label="Abrir perfil de invitado">
+                        <img src="https://images.emojiterra.com/google/noto-emoji/unicode-15/color/512px/1f48e.png" 
+                            alt="Image Invitado"
+                            class="profile-avatar">
+                    </button>
+                </li>
+                <li class="nav-item" *ngIf="rol=='admin'">
+                    <button
+                        type="button"
+                        class="profile-trigger"
+                        (click)="openProfile()"
+                        aria-label="Abrir perfil de administrador">
+                        <img src="images/eevee.jpg" 
+                            alt="Image Administrador"
+                            class="profile-avatar">
                     </button>
                 </li>
             </ul>

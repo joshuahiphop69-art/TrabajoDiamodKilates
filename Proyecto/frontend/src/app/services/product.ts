@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, withFetch } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class prod {
-  private API = 'http://localhost:5000/list-products'
+  private API = 'http://localhost:5000/list-products';
+  private uploadAPI = 'http://localhost:5000/upload-product-images';
 
   constructor(private http: HttpClient) {}
 
@@ -20,5 +21,14 @@ export class prod {
   }
   deleteprod(id: string) {
     return this.http.delete(`${this.API}/${id}`);
+  }
+  uploadImages(files: File[]) {
+    const formData = new FormData();
+
+    files.forEach((file) => {
+      formData.append('images', file);
+    });
+
+    return this.http.post<{ paths: string[] }>(this.uploadAPI, formData);
   }
 }
