@@ -10,58 +10,164 @@
 
     <div class="modal-body">
       <form class="edit-form">
-        <div class="mb-3">
-          <label class="form-label">Nombre</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="producto.nombre"
-            name="nombre">
-        </div>
+        <div class="form-grid">
+          <div class="mb-3 field-full">
+            <label class="form-label fw-bold">Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="producto.nombre"
+              name="nombre"
+              required
+              minlength="5"
+              placeholder="Ingrese el nombre del producto">
+          </div>
 
-        <div class="mb-3">
-          <label class="form-label">Precio</label>
-          <input
-            type="number"
-            class="form-control"
-            [(ngModel)]="producto.precio"
-            name="precio">
-        </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Material</label>
+            <select
+              class="form-select"
+              [(ngModel)]="producto.material"
+              name="material">
+              <option value="">Seleccione un material</option>
+              <option *ngFor="let material of materialOptions" [value]="material">
+                {{ material }}
+              </option>
+            </select>
+          </div>
 
-        <div class="mb-3">
-          <label class="form-label">Material</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="producto.material"
-            name="material">
-        </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Categoría</label>
+            <select
+              class="form-select"
+              [(ngModel)]="producto.categoria"
+              name="categoria">
+              <option value="">Seleccione una categoría</option>
+              <option *ngFor="let categoria of categoriaOptions" [value]="categoria">
+                {{ categoria }}
+              </option>
+            </select>
+          </div>
 
-        <div class="mb-3">
-          <label class="form-label">Categoría</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="producto.categoria"
-            name="categoria">
-        </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Etiqueta 1</label>
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="producto.etiq_1"
+              name="etiq_1"
+              min="0"
+              max="15"
+              step="1"
+              placeholder="0 a 15">
+          </div>
 
-        <div class="mb-3">
-          <label class="form-label">Etiqueta 1</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="producto.etiq_1"
-            name="etiq_1">
-        </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold">Etiqueta 2</label>
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="producto.etiq_2"
+              name="etiq_2"
+              min="0"
+              max="24"
+              step="1"
+              placeholder="0 a 24">
+          </div>
 
-        <div class="mb-0">
-          <label class="form-label">Etiqueta 2</label>
-          <input
-            type="text"
-            class="form-control"
-            [(ngModel)]="producto.etiq_2"
-            name="etiq_2">
+          <div class="mb-3">
+            <label class="form-label fw-bold">Etiqueta 3</label>
+            <select
+              class="form-select"
+              [(ngModel)]="producto.etiq_3"
+              name="etiq_3">
+              <option value="">Seleccione una opción</option>
+              <option *ngFor="let option of etiq3Options" [value]="option">
+                {{ option }}
+              </option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Etiqueta 4</label>
+            <select
+              class="form-select"
+              [(ngModel)]="producto.etiq_4"
+              name="etiq_4">
+              <option value="">Seleccione un color</option>
+              <option *ngFor="let option of etiq4Options" [value]="option">
+                {{ option }}
+              </option>
+            </select>
+          </div>
+
+          <div class="mb-3 field-full">
+            <label class="form-label fw-bold">Etiqueta 5</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="producto.etiq_5"
+              name="etiq_5"
+              minlength="5"
+              placeholder="Ingrese la quinta etiqueta">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Precio</label>
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="producto.precio"
+              name="precio"
+              min="10"
+              step="1"
+              placeholder="Ingrese el precio">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Stock</label>
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="producto.stock"
+              name="stock"
+              min="0"
+              step="1"
+              placeholder="Ingrese el stock">
+          </div>
+
+          <div class="mb-3 field-full">
+            <label class="form-label fw-bold">Detalle 1</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="producto.deta_1"
+              name="deta_1"
+              minlength="5"
+              placeholder="Ingrese el primer detalle">
+          </div>
+
+          <div class="mb-3 field-full">
+            <label class="form-label fw-bold">Detalle 2</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="producto.deta_2"
+              name="deta_2"
+              minlength="5"
+              placeholder="Ingrese el segundo detalle">
+          </div>
+
+          <div class="mb-0 field-full">
+            <label class="form-label fw-bold">Detalle 3</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="producto.deta_3"
+              name="deta_3"
+              minlength="5"
+              placeholder="Ingrese el tercer detalle">
+          </div>
         </div>
       </form>
     </div>

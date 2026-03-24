@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
-type EstadoPedido = 'Pendientes' | 'Entregados' | 'Cancelados';
+type EstadoPedido = 'PENDIENTES' | 'ENTREGADOS' | 'CANCELADOS';
 
 @Component({
   selector: 'app-request',
@@ -11,7 +11,7 @@ type EstadoPedido = 'Pendientes' | 'Entregados' | 'Cancelados';
   styleUrl: './request.css',
 })
 export class Request {
-  estadoActivo: EstadoPedido = 'Pendientes';
+  estadoActivo: EstadoPedido = 'PENDIENTES';
 
   pedidos = [
     {
@@ -21,7 +21,7 @@ export class Request {
       productos: 'Anillo de oro, collar de diamante',
       total: 18450,
       fecha: '20/03/2026',
-      estado: 'Pendientes' as EstadoPedido,
+      estado: 'PENDIENTES' as EstadoPedido,
     },
     {
       folio: 'PED-1002',
@@ -30,7 +30,7 @@ export class Request {
       productos: 'Pulsera de plata',
       total: 2950,
       fecha: '19/03/2026',
-      estado: 'Pendientes' as EstadoPedido,
+      estado: 'PENDIENTES' as EstadoPedido,
     },
     {
       folio: 'PED-0991',
@@ -39,7 +39,7 @@ export class Request {
       productos: 'Aretes de oro blanco',
       total: 6300,
       fecha: '16/03/2026',
-      estado: 'Entregados' as EstadoPedido,
+      estado: 'ENTREGADOS' as EstadoPedido,
     },
     {
       folio: 'PED-0984',
@@ -48,11 +48,11 @@ export class Request {
       productos: 'Anillo de compromiso',
       total: 22700,
       fecha: '14/03/2026',
-      estado: 'Cancelados' as EstadoPedido,
+      estado: 'CANCELADOS' as EstadoPedido,
     },
   ];
 
-  estados: EstadoPedido[] = ['Pendientes', 'Entregados', 'Cancelados'];
+  estados: EstadoPedido[] = ['PENDIENTES', 'ENTREGADOS', 'CANCELADOS'];
 
   seleccionarEstado(estado: EstadoPedido) {
     this.estadoActivo = estado;
