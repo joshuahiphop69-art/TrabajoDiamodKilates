@@ -1,6 +1,7 @@
 .home-page {
   min-height: 100%;
-  background: rgb(215, 140, 224);
+  background: var(--bg);
+  overflow-x: hidden;
 }
 
 .welcome-panel {
@@ -28,14 +29,15 @@
 .welcome-copy {
   position: relative;
   z-index: 1;
-  color: #ffffff;
+  color: var(--navbar-text);
+  max-width: min(640px, 100%);
 }
 
 .welcome-kicker {
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  font-size: 0.85rem;
-  color: rgb(215, 140, 224);
+  font-size: clamp(0.78rem, 1.6vw, 0.9rem);
+  color: var(--brand-accent);
 }
 
 .welcome-title {
@@ -84,15 +86,16 @@
 .menu-btn strong {
   position: relative;
   z-index: 1;
-  color: #ffffff;
+  color: var(--navbar-text);
   font-size: clamp(1.8rem, 3vw, 3rem);
   font-weight: 800;
   letter-spacing: 0.12em;
+  text-align: center;
 }
 
 @media (max-width: 991px) {
   .buttons-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .menu-btn {
@@ -100,13 +103,30 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
+  .buttons-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-btn {
+    aspect-ratio: 16 / 11;
+  }
+
   .welcome-panel {
     min-height: 32vh;
     padding: 2rem 1rem;
+    align-items: flex-end;
   }
 
   .buttons-section {
     padding: 1rem;
+  }
+
+  .welcome-title {
+    font-size: clamp(1.8rem, 8vw, 2.8rem);
+  }
+
+  .menu-btn strong {
+    font-size: clamp(1.35rem, 7vw, 2.2rem);
   }
 }

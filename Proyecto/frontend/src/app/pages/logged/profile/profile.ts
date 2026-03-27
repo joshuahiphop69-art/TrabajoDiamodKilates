@@ -10,7 +10,7 @@ import { Perfiles } from '../../../services/perfiles';
   templateUrl: './profile.html',
   styleUrl: './profile.css',
 })
-export class Profile {
+export class ProfileComponent {
   private readonly themeKey = 'app_theme';
   readonly fallbackAvatar = 'images/eevee.jpg';
 

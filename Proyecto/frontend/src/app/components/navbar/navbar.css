@@ -5,6 +5,7 @@
 .navbar {
   min-height: 40px;
   color: var(--navbar-text);
+  overflow-x: clip;
 }
 
 .navbar-left-links,
@@ -51,7 +52,7 @@
 .brand-title {
   font-weight: 700;
   letter-spacing: 3px;
-  font-size: 1rem;
+  font-size: clamp(0.95rem, 1.8vw, 1rem);
 }
 
 .brand-title span {
@@ -59,7 +60,7 @@
 }
 
 .brand-subtitle {
-  font-size: 0.5rem;
+  font-size: clamp(0.48rem, 1.2vw, 0.58rem);
   letter-spacing: 2px;
   color: var(--navbar-text-muted);
   margin-top: 5px;
@@ -123,5 +124,50 @@ app-profile {
 
   .nav-item-profile {
     align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding-inline: 0.25rem;
+  }
+
+  .navbar-left-links,
+  .navbar-right-links {
+    width: 100%;
+    gap: 0.25rem;
+  }
+
+  .navbar-left-links .nav-item,
+  .navbar-right-links .nav-item {
+    width: 100%;
+  }
+
+  .navbar-left-links .nav-link,
+  .navbar-right-links .nav-link {
+    width: 100%;
+    min-height: auto;
+    padding-block: 0.7rem;
+  }
+
+  .header-logo {
+    width: 26px;
+    height: 26px;
+  }
+
+  .brand-title {
+    letter-spacing: 0.12em;
+  }
+
+  .brand-subtitle {
+    letter-spacing: 0.12em;
+  }
+
+  .navbar-catalog-menu {
+    width: min(100%, calc(100vw - 1.5rem));
+  }
+
+  .profile-trigger {
+    margin-left: 0;
   }
 }

@@ -11,7 +11,7 @@ import { LogIn } from './pages/guest/log-in/log-in';
 import { SignUp } from './pages/guest/sign-up/sign-up';
 
 import { Carrito } from './pages/logged/carrito/carrito';
-import { Profile } from './pages/logged/profile/profile';
+import { ProfileComponent } from './pages/logged/profile/profile';
 import { Request } from './pages/admin/request/request';
 
 import { CreateProduct } from './pages/admin/create-product/create-product';
@@ -29,7 +29,7 @@ export const routes: Routes = [
     { path: "signup", component: SignUp },
 
     { path: "carrito", component: Carrito },
-    { path: "profile", component: Profile },
+    { path: "profile", component: ProfileComponent },
     { path: "request", component: Request },
 
     { path: "create-stock", component: CreateProduct },
