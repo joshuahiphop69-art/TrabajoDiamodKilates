@@ -6,6 +6,57 @@
   --theme-surface: rgb(249, 236, 250);
   --theme-text: rgb(53, 16, 60);
   --theme-text-contrast: rgb(255, 244, 255);
+  --bg: rgb(242, 220, 245);
+  --text: var(--theme-text);
+  --text-strong: var(--theme-dark-strong);
+  --card-bg: var(--theme-surface);
+  --hover-bg: rgba(215, 140, 224, 0.24);
+  --text-primary: var(--theme-text);
+  --text-muted: rgba(53, 16, 60, 0.68);
+  --border-color: rgba(113, 0, 128, 0.18);
+  --dropdown-hover-bg: var(--hover-bg);
+  --dropdown-hover-text: var(--text);
+  --danger-color: rgb(176, 36, 78);
+  --danger-soft-bg: rgba(176, 36, 78, 0.12);
+  --danger-hover: rgb(138, 23, 59);
+  --surface-muted: rgba(113, 0, 128, 0.14);
+  --accent-color: var(--theme-dark);
+  --text-inverse: var(--theme-text-contrast);
+  --shadow-color: rgba(0, 0, 0, 0.16);
+  --navbar-bg: linear-gradient(135deg, var(--theme-dark-strong), var(--theme-dark));
+  --navbar-text: var(--theme-text-contrast);
+  --navbar-text-muted: rgba(255, 244, 255, 0.78);
+  --navbar-border: rgba(255, 255, 255, 0.2);
+  --navbar-avatar-bg: rgba(255, 255, 255, 0.12);
+  --panel-strong: linear-gradient(135deg, var(--theme-dark-strong), var(--theme-dark));
+  --brand-accent: var(--theme-light);
+}
+
+body.dark-mode {
+  --bg: rgb(24, 11, 29);
+  --text: rgb(248, 236, 249);
+  --text-strong: rgb(255, 203, 244);
+  --card-bg: rgb(38, 17, 46);
+  --hover-bg: rgba(255, 255, 255, 0.08);
+  --text-primary: var(--text);
+  --text-muted: rgba(248, 236, 249, 0.7);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --dropdown-hover-bg: var(--hover-bg);
+  --dropdown-hover-text: rgb(255, 244, 255);
+  --danger-color: rgb(255, 138, 170);
+  --danger-soft-bg: rgba(255, 138, 170, 0.12);
+  --danger-hover: rgb(255, 182, 202);
+  --surface-muted: rgba(255, 255, 255, 0.18);
+  --accent-color: rgb(215, 140, 224);
+  --text-inverse: rgb(32, 12, 39);
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  --navbar-bg: linear-gradient(135deg, rgb(28, 13, 34), rgb(47, 21, 58));
+  --navbar-text: rgb(248, 236, 249);
+  --navbar-text-muted: rgba(248, 236, 249, 0.7);
+  --navbar-border: rgba(255, 255, 255, 0.12);
+  --navbar-avatar-bg: rgba(255, 255, 255, 0.08);
+  --panel-strong: linear-gradient(135deg, rgb(61, 27, 76), rgb(90, 35, 106));
+  --brand-accent: rgb(240, 178, 246);
 }
 
 html,
@@ -15,8 +66,9 @@ body {
 
 body {
   margin: 0;
-  background: var(--theme-light);
-  color: var(--theme-text);
+  background: var(--bg);
+  color: var(--text);
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 .bg-dark,
@@ -26,23 +78,23 @@ body {
 .btn-success,
 .btn-danger,
 .badge.bg-secondary {
-  background-color: var(--theme-dark) !important;
-  border-color: var(--theme-dark) !important;
-  color: var(--theme-text-contrast) !important;
+  background: var(--panel-strong) !important;
+  border-color: var(--accent-color) !important;
+  color: var(--navbar-text) !important;
 }
 
 .btn-secondary,
 .btn-warning,
 .btn-outline-light:hover,
 .badge.bg-info {
-  background-color: var(--theme-light) !important;
-  border-color: var(--theme-light) !important;
-  color: var(--theme-text) !important;
+  background-color: var(--hover-bg) !important;
+  border-color: var(--border-color) !important;
+  color: var(--text) !important;
 }
 
 .btn-outline-light {
-  border-color: var(--theme-light) !important;
-  color: var(--theme-text-contrast) !important;
+  border-color: var(--border-color) !important;
+  color: var(--navbar-text) !important;
 }
 
 .card,
@@ -52,8 +104,8 @@ body {
 .table,
 .form-control,
 .form-select {
-  background-color: var(--theme-surface);
-  color: var(--theme-text);
+  background-color: var(--card-bg);
+  color: var(--text);
 }
 
 .form-control,
@@ -61,36 +113,36 @@ body {
 .card,
 .dropdown-menu,
 .offcanvas {
-  border-color: rgba(113, 0, 128, 0.18);
+  border-color: var(--border-color);
 }
 
 .dropdown-item {
-  color: var(--theme-text-contrast);
+  color: var(--text);
 }
 
 .dropdown-item:hover,
 .dropdown-item:focus {
-  background-color: var(--theme-light) !important;
-  color: var(--theme-text) !important;
+  background-color: var(--hover-bg) !important;
+  color: var(--text) !important;
 }
 
 .table-striped > tbody > tr:nth-of-type(odd) > * {
-  background-color: rgba(215, 140, 224, 0.18);
-  color: var(--theme-text);
+  background-color: var(--hover-bg);
+  color: var(--text);
 }
 
 .text-success {
-  color: var(--theme-dark) !important;
+  color: var(--text-strong) !important;
 }
 
 .form-check-input:checked {
-  background-color: var(--theme-dark);
-  border-color: var(--theme-dark);
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
 }
 
 .btn-close:focus,
 .form-control:focus,
 .form-select:focus {
-  box-shadow: 0 0 0 0.25rem rgba(113, 0, 128, 0.2);
-  border-color: var(--theme-dark);
+  box-shadow: 0 0 0 0.25rem color-mix(in srgb, var(--accent-color) 28%, transparent);
+  border-color: var(--accent-color);
 }

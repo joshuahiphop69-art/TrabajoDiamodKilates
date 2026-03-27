@@ -1,3 +1,4 @@
 .theme-footer {
-  background-color: var(--theme-dark);
+  background: var(--navbar-bg);
+  color: var(--navbar-text);
 }

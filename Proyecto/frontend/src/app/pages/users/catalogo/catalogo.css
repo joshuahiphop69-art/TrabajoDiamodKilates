@@ -1,18 +1,20 @@
 .theme-page-light {
-  background-color: var(--theme-light);
+  background-color: var(--bg);
 }
 
 .theme-header-dark {
-  background-color: var(--theme-dark);
+  background: var(--panel-strong);
 }
 
 .catalog-title {
-  color: var(--theme-text);
+  color: var(--text);
 }
 
 .product-card {
   overflow: hidden;
-  border: 1px solid rgba(113, 0, 128, 0.14);
+  border: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+  color: var(--text);
 }
 
 .product-image {
@@ -21,22 +23,23 @@
 }
 
 .product-name {
-  color: var(--theme-text);
+  color: var(--text);
 }
 
 .product-stock {
-  color: var(--theme-dark);
+  color: var(--text-strong);
   font-weight: 600;
 }
 
 .catalog-message {
   padding: 2rem 1.25rem;
   border-radius: 16px;
-  background-color: var(--theme-light-soft);
-  color: var(--theme-text);
+  background-color: var(--card-bg);
+  color: var(--text);
   text-align: center;
+  border: 1px solid var(--border-color);
 }
 
 .error-message {
-  color: var(--theme-dark-strong);
+  color: var(--danger-color);
 }

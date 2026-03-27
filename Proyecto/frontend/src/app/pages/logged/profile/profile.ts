@@ -12,9 +12,10 @@ import { Perfiles } from '../../../services/perfiles';
 })
 export class Profile {
   private readonly themeKey = 'app_theme';
+  readonly fallbackAvatar = 'images/eevee.jpg';
 
   nombreUsuario = '';
-  fotoUsuario = 'images/logo_komi.gif';
+  fotoUsuario = this.fallbackAvatar;
   menuAbierto = false;
   mostrarPerfil = false;
   temaOscuro = false;
@@ -37,12 +38,12 @@ export class Profile {
 
     if (user) {
       this.nombreUsuario = user.nombre || 'Usuario';
-      this.fotoUsuario = 'images/logo_komi.gif';
+      this.fotoUsuario = user.foto ? `images/${user.foto}` : this.fallbackAvatar;
       return;
     }
 
     this.nombreUsuario = '';
-    this.fotoUsuario = 'images/logo_komi.gif';
+    this.fotoUsuario = this.fallbackAvatar;
     this.closeMenu();
   }
 
@@ -95,11 +96,24 @@ export class Profile {
     event?.stopPropagation();
 
     this.temaOscuro = !this.temaOscuro;
+    const theme = this.temaOscuro ? 'dark' : 'light';
+
     document.body.classList.toggle('dark-mode', this.temaOscuro);
 
     if (typeof window !== 'undefined') {
-      localStorage.setItem(this.themeKey, this.temaOscuro ? 'dark' : 'light');
+      localStorage.setItem(this.themeKey, theme);
+      window.dispatchEvent(new CustomEvent('app-theme-change', { detail: { theme } }));
     }
+  }
+
+  onAvatarError(event: Event) {
+    const target = event.target as HTMLImageElement | null;
+
+    if (!target || target.src.includes(this.fallbackAvatar)) {
+      return;
+    }
+
+    target.src = this.fallbackAvatar;
   }
 
   logout() {

@@ -29,7 +29,7 @@
                         aria-expanded="false">
                         <strong>Catálogo</strong>
                     </a>
-                    <ul class="dropdown-menu" style="background-color: #1d1d1d;">
+                    <ul class="dropdown-menu navbar-catalog-menu">
                         <li>
                             <a class="dropdown-item text-white"
                                 routerLink="/catalogo">
@@ -87,27 +87,31 @@
                         <strong>Registrarse</strong>
                     </a>
                 </li>
-                <li class="nav-item" *ngIf="rol=='logged'">
+                <li class="nav-item nav-item-profile" *ngIf="rol=='logged'">
                     <button
                         type="button"
                         class="profile-trigger"
-                        (click)="openProfile()"
+                        (click)="openProfile($event)"
                         aria-label="Abrir perfil de invitado">
-                        <img src="https://images.emojiterra.com/google/noto-emoji/unicode-15/color/512px/1f48e.png" 
+                        <img src="https://images.emojiterra.com/google/noto-emoji/unicode-15/color/512px/1f48e.png"
+                            (error)="onAvatarError($event)"
                             alt="Image Invitado"
                             class="profile-avatar">
                     </button>
+                    <app-profile></app-profile>
                 </li>
-                <li class="nav-item" *ngIf="rol=='admin'">
+                <li class="nav-item nav-item-profile" *ngIf="rol=='admin'">
                     <button
                         type="button"
                         class="profile-trigger"
-                        (click)="openProfile()"
+                        (click)="openProfile($event)"
                         aria-label="Abrir perfil de administrador">
-                        <img src="images/eevee.jpg" 
+                        <img src="images/eevee.jpg"
+                            (error)="onAvatarError($event)"
                             alt="Image Administrador"
                             class="profile-avatar">
                     </button>
+                    <app-profile></app-profile>
                 </li>
             </ul>
         </div>

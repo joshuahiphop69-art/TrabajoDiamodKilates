@@ -1,10 +1,11 @@
 <section
   *ngIf="nombreUsuario && menuAbierto"
   id="profilePanel"
-  class="profile-dropdown card border-0 shadow-lg">
+  class="profile-dropdown">
   <div class="profile-summary">
     <img
       [src]="fotoUsuario"
+      (error)="onAvatarError($event)"
       alt="Avatar del usuario"
       class="profile-avatar">
 
@@ -15,6 +16,8 @@
   </div>
 
   <div class="profile-actions">
+    <div class="profile-divider"></div>
+
     <button
       type="button"
       class="menu-item"
