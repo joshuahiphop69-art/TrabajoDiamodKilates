@@ -1,0 +1,42 @@
+.theme-page-light {
+  background-color: var(--theme-light);
+}
+
+.theme-header-dark {
+  background-color: var(--theme-dark);
+}
+
+.catalog-title {
+  color: var(--theme-text);
+}
+
+.product-card {
+  overflow: hidden;
+  border: 1px solid rgba(113, 0, 128, 0.14);
+}
+
+.product-image {
+  height: 300px;
+  object-fit: cover;
+}
+
+.product-name {
+  color: var(--theme-text);
+}
+
+.product-stock {
+  color: var(--theme-dark);
+  font-weight: 600;
+}
+
+.catalog-message {
+  padding: 2rem 1.25rem;
+  border-radius: 16px;
+  background-color: var(--theme-light-soft);
+  color: var(--theme-text);
+  text-align: center;
+}
+
+.error-message {
+  color: var(--theme-dark-strong);
+}

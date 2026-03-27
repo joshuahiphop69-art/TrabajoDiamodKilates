@@ -1,89 +1,65 @@
-<div class="container-fluid py-4" style="background-color: #97a5b6">
-
-  <h3 class="fs-1 fw-bold text-center mb-4">
+<div class="container-fluid py-4 theme-page-light">
+  <h3 class="catalog-title fs-1 fw-bold text-center mb-4">
     <strong>Catálogo</strong>
   </h3>
 
   <div class="row">
-
-    <!-- 🔥 IZQUIERDA: PRODUCTOS -->
     <section class="col-lg-9 col-md-8">
+      <div *ngIf="cargando" class="catalog-message">
+        Cargando productos...
+      </div>
 
-      <div class="row">
+      <div *ngIf="error" class="catalog-message error-message">
+        {{ error }}
+      </div>
 
-        <!-- 🔥 CAMBIO: CARDS DINÁMICAS -->
-        <div class="col-md-6 col-xl-4 mb-4" *ngFor="let prod of productos">
-          <div class="card h-100 shadow">
-
-            <img 
-              [src]="prod.img_1 || 'images/img_w1.jpg'"
-              class="card-img-top"
-              style="height:300px; object-fit:cover;"
-            >
+      <div class="row" *ngIf="!cargando && !error">
+        <div class="col-md-6 col-xl-4 mb-4" *ngFor="let producto of productosFiltrados">
+          <div class="card h-100 shadow product-card">
+            <img
+              [src]="getImagenProducto(producto)"
+              class="card-img-top product-image"
+              [alt]="producto.nombre">
 
             <div class="card-body">
-              <h5 class="fw-bold">{{ prod.nombre }}</h5>
-
-              <p class="fw-bold text-success">
-                Precio: ${{ prod.precio }}
-              </p>
-
-              <ul>
-                <li>{{ prod.deta_1 }}</li>
-                <li>{{ prod.deta_2 }}</li>
-                <li>{{ prod.deta_3 }}</li>
-              </ul>
+              <h5 class="fw-bold product-name">{{ producto.nombre }}</h5>
+              <p class="fw-bold text-success">Precio: ${{ producto.precio }}</p>
+              <p class="product-stock mb-0">Stock: {{ getStock(producto) }}</p>
             </div>
-
           </div>
         </div>
 
+        <div class="col-12" *ngIf="!productosFiltrados.length">
+          <div class="catalog-message">
+            No hay productos que coincidan con los filtros seleccionados.
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- 🔥 DERECHA: FILTROS (NO SE TOCA) -->
     <aside class="col-lg-3 col-md-4 mt-4 mt-md-0">
-
       <div class="card shadow">
-
-        <div class="card-header text-white"
-          style="background-color:#004394">
+        <div class="card-header text-white theme-header-dark">
           Filtros
         </div>
 
         <div class="card-body">
-
-          <div class="form-check mb-2">
-            <input class="form-check-input" type="checkbox">
-            <label class="form-check-label">
-              Anillos
+          <div class="form-check mb-2" *ngFor="let filtro of filtros">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [id]="filtro"
+              [(ngModel)]="filtrosSeleccionados[filtro]">
+            <label class="form-check-label" [for]="filtro">
+              {{ filtro }}
             </label>
           </div>
 
-          <div class="form-check mb-2">
-            <input class="form-check-input" type="checkbox">
-            <label class="form-check-label">
-              Cadenas
-            </label>
-          </div>
-
-          <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox">
-            <label class="form-check-label">
-              Pulseras
-            </label>
-          </div>
-
-          <button class="btn w-100 text-white"
-            style="background-color:#004394">
+          <button class="btn btn-primary w-100 mt-3" (click)="aplicarFiltros()">
             Aplicar filtros
           </button>
-
         </div>
-
       </div>
-
     </aside>
-
   </div>
 </div>

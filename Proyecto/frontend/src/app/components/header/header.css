@@ -1,5 +1,5 @@
 .header-container {
-  background: linear-gradient(135deg, #0b2c4d, #052850);
+  background: linear-gradient(135deg, var(--theme-dark-strong), var(--theme-dark));
   color: white;
 }
 
@@ -17,7 +17,7 @@
 }
 
 .brand-title span {
-  color: #d4af37; /* dorado elegante */
+  color: var(--theme-light);
 }
 
 .brand-subtitle {

@@ -1,1 +1,96 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --theme-dark: rgb(113, 0, 128);
+  --theme-dark-strong: rgb(88, 0, 100);
+  --theme-light: rgb(215, 140, 224);
+  --theme-light-soft: rgb(238, 208, 242);
+  --theme-surface: rgb(249, 236, 250);
+  --theme-text: rgb(53, 16, 60);
+  --theme-text-contrast: rgb(255, 244, 255);
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--theme-light);
+  color: var(--theme-text);
+}
+
+.bg-dark,
+.text-bg-dark,
+.table-dark,
+.btn-primary,
+.btn-success,
+.btn-danger,
+.badge.bg-secondary {
+  background-color: var(--theme-dark) !important;
+  border-color: var(--theme-dark) !important;
+  color: var(--theme-text-contrast) !important;
+}
+
+.btn-secondary,
+.btn-warning,
+.btn-outline-light:hover,
+.badge.bg-info {
+  background-color: var(--theme-light) !important;
+  border-color: var(--theme-light) !important;
+  color: var(--theme-text) !important;
+}
+
+.btn-outline-light {
+  border-color: var(--theme-light) !important;
+  color: var(--theme-text-contrast) !important;
+}
+
+.card,
+.modal-content,
+.dropdown-menu,
+.offcanvas,
+.table,
+.form-control,
+.form-select {
+  background-color: var(--theme-surface);
+  color: var(--theme-text);
+}
+
+.form-control,
+.form-select,
+.card,
+.dropdown-menu,
+.offcanvas {
+  border-color: rgba(113, 0, 128, 0.18);
+}
+
+.dropdown-item {
+  color: var(--theme-text-contrast);
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background-color: var(--theme-light) !important;
+  color: var(--theme-text) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: rgba(215, 140, 224, 0.18);
+  color: var(--theme-text);
+}
+
+.text-success {
+  color: var(--theme-dark) !important;
+}
+
+.form-check-input:checked {
+  background-color: var(--theme-dark);
+  border-color: var(--theme-dark);
+}
+
+.btn-close:focus,
+.form-control:focus,
+.form-select:focus {
+  box-shadow: 0 0 0 0.25rem rgba(113, 0, 128, 0.2);
+  border-color: var(--theme-dark);
+}
