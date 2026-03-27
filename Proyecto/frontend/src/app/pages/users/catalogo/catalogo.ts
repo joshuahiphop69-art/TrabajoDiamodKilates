@@ -90,7 +90,7 @@ export class Catalogo implements OnInit {
   }
 
   getImagenProducto(producto: ProductoCatalogo) {
-    const ruta = producto.img_1 || producto.img_2 || producto.img_3 || producto.img_4;
+    const ruta = producto.img_1;
 
     if (!ruta) {
       return 'images/diamantes.jpg';
