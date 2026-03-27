@@ -2,80 +2,38 @@
     style="background-color: #97a5b6">
     <h3 class="fs-1 fw-bold pt-2"><strong>Lo Mejor en Joyeria de Oro</strong></h3>
 
-    <div class="row pt-2">
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow">
-                <img src="images/oro1.jpg"
-                    class="card-img-top"
-                    alt="Oro 1"
-                    style="height: 300px; object-fit: cover;">
-                <div class="card-body">
-                    <h3 class="fs-3 fw-bold"><strong>Anillo con Grabado y Patron de Diseño</strong></h3>
-                    <h4 class="fs-5"><strong>Precio: $2,200</strong></h4>
-                    <h5 class="fs-5">Detalles: </h5>
-                    <ul style="list-style-type: circle;">
-                        <li class="fs-6">Diamantes incrustados</li>
-                        <li class="fs-6">Grabado a elección del cliente</li>
-                        <li class="fs-6">Oro de 18 kilates</li>
-                    </ul>
-                </div>
-            </div>
+    <div class="container-fluid" style="background-color: #97a5b6">
+
+  <h3 class="fs-1 fw-bold pt-2 text-center">
+    <strong>Lo Mejor en Joyería de Oro</strong>
+  </h3>
+
+  <div class="row pt-2">
+
+    <div class="col-md-4 mb-4" *ngFor="let prod of productos">
+      <div class="card h-100 shadow">
+
+        <img [src]="prod.imagen || 'images/oro1.jpg'"
+             class="card-img-top"
+             style="height: 300px; object-fit: cover;">
+
+        <div class="card-body">
+          <h3 class="fs-5 fw-bold">{{ prod.nombre }}</h3>
+
+          <h4 class="fs-6">
+            Precio: ${{ prod.precio }}
+          </h4>
+
+          <ul>
+            <li>{{ prod.accesorio }}</li>
+            <li>Stock: {{ prod.existencias }}</li>
+          </ul>
         </div>
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow">
-                <img src="images/oro2.jpg"
-                    class="card-img-top"
-                    alt="Oro 2"
-                    style="height: 300px; object-fit: cover;">
-                <div class="card-body">
-                    <h3 class="fs-3 fw-bold"><strong>Oro Laton Anillo diamante incrustado</strong></h3>
-                    <h4 class="fs-5"><strong>Precio: $1,000</strong></h4>
-                    <h5 class="fs-5">Detalles: </h5>
-                    <ul style="list-style-type: circle;">
-                        <li class="fs-6">Diamantito incrustado</li>
-                        <li class="fs-6">Grabado de la pareja o destinatario</li>
-                        <li class="fs-6">Oro de 6 kilates con Laton</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow">
-                <img src="images/oro3.jpg"
-                    class="card-img-top"
-                    alt="Oro 3"
-                    style="height: 300px; object-fit: cover;">
-                <div class="card-body">
-                    <h3 class="fs-3 fw-bold"><strong>Anillos de Oro para Matrimonio</strong></h3>
-                    <h4 class="fs-5"><strong>Precio: $3,000</strong></h4>
-                    <h5 class="fs-5">Detalles: </h5>
-                    <ul style="list-style-type: circle;">
-                        <li class="fs-6">Diamante incrustado de 4 mm de grosor</li>
-                        <li class="fs-6">A juego con paquete de empaque</li>
-                        <li class="fs-6">Oro de 12 kilates</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow">
-                <img src="images/oro4.jpg"
-                    class="card-img-top"
-                    alt="Oro 4"
-                    style="height: 300px; object-fit: cover;">
-                <div class="card-body">
-                    <h3 class="fs-3 fw-bold"><strong>Pulsera Minimalista de Oro</strong></h3>
-                    <h4 class="fs-5"><strong>Precio: $900</strong></h4>
-                    <h5 class="fs-5">Detalles: </h5>
-                    <ul style="list-style-type: circle;">
-                        <li class="fs-6">Cadena a elección y medida del cliente</li>
-                        <li class="fs-6">Oro de 6 kilates</li>
-                        <li class="fs-6">Incluye set personalizado de regalo y empaque</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+
+      </div>
     </div>
+
+  </div>
 </div>
 
 

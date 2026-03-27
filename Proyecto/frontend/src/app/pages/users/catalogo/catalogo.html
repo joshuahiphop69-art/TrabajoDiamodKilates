@@ -11,100 +11,37 @@
 
       <div class="row">
 
-        <!-- CARD 1 -->
-        <div class="col-md-6 col-xl-4 mb-4">
+        <!-- 🔥 CAMBIO: CARDS DINÁMICAS -->
+        <div class="col-md-6 col-xl-4 mb-4" *ngFor="let prod of productos">
           <div class="card h-100 shadow">
-            <img src="images/img_w1.jpg"
-              class="card-img-top"
-              style="height:300px; object-fit:cover;">
-            <div class="card-body">
-              <h5 class="fw-bold">Poster: Marin Kitagawa Evento LoveHotel</h5>
-              <p class="fw-bold text-success">Precio: $1,000,000</p>
-              <ul>
-                <li>Es preciosa</li>
-                <li>Brilla de noche</li>
-                <li>Mide 2m x 4m</li>
-              </ul>
-            </div>
-          </div>
-        </div>
 
-        <!-- CARD 2 -->
-        <div class="col-md-6 col-xl-4 mb-4">
-          <div class="card h-100 shadow">
-            <img src="images/img_w2.png"
+            <img 
+              [src]="prod.img_1 || 'images/img_w1.jpg'"
               class="card-img-top"
-              style="height:300px; object-fit:cover;">
-            <div class="card-body">
-              <h5 class="fw-bold">Poster: Mambo Fondito Bomnito</h5>
-              <p class="fw-bold text-success">Precio: $500,000</p>
-              <ul>
-                <li>Es Matikanetanhauser</li>
-                <li>*inserte momo Manbo singing</li>
-                <li>Mide 3m x 3.5m</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+              style="height:300px; object-fit:cover;"
+            >
 
-        <!-- CARD 3 -->
-        <div class="col-md-6 col-xl-4 mb-4">
-          <div class="card h-100 shadow">
-            <img src="images/img_w3.jpg"
-              class="card-img-top"
-              style="height:300px; object-fit:cover;">
             <div class="card-body">
-              <h5 class="fw-bold">Poster: Itsuki Otoño La Besto</h5>
-              <p class="fw-bold text-success">Precio: $500,000</p>
-              <ul>
-                <li>La mejor quintilliza</li>
-                <li>Es de otoño rojizo</li>
-                <li>Mide 3m x 5m</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+              <h5 class="fw-bold">{{ prod.nombre }}</h5>
 
-        <!-- CARD 4 -->
-        <div class="col-md-6 col-xl-4 mb-4">
-          <div class="card h-100 shadow">
-            <img src="images/img_w4.jpg"
-              class="card-img-top"
-              style="height:300px; object-fit:cover;">
-            <div class="card-body">
-              <h5 class="fw-bold">Poster: Maruzensky La Mejor Uma</h5>
-              <p class="fw-bold text-success">Precio: $10,000,000</p>
-              <ul>
-                <li>LM-2500-PM</li>
-                <li>Brilla de noche</li>
-                <li>La papeadora de los 70s</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+              <p class="fw-bold text-success">
+                Precio: ${{ prod.precio }}
+              </p>
 
-        <!-- CARD 5 -->
-        <div class="col-md-6 col-xl-4 mb-4">
-          <div class="card h-100 shadow">
-            <img src="images/img_w5.jpg"
-              class="card-img-top"
-              style="height:300px; object-fit:cover;">
-            <div class="card-body">
-              <h5 class="fw-bold">Poster: Marin Kitagawa Te Mira We</h5>
-              <p class="fw-bold text-success">Precio: $1,000,000</p>
               <ul>
-                <li>Es preciosa</li>
-                <li>Te mira tierno</li>
-                <li>Mide 2m x 4m</li>
+                <li>{{ prod.deta_1 }}</li>
+                <li>{{ prod.deta_2 }}</li>
+                <li>{{ prod.deta_3 }}</li>
               </ul>
             </div>
+
           </div>
         </div>
 
       </div>
     </section>
 
-    <!-- 🔥 DERECHA: FILTROS -->
+    <!-- 🔥 DERECHA: FILTROS (NO SE TOCA) -->
     <aside class="col-lg-3 col-md-4 mt-4 mt-md-0">
 
       <div class="card shadow">

@@ -1,24 +1,32 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, withFetch } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { Observable, of, tap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class prod {
-  private API = 'http://localhost:5000/list-products'
+
+  private apiUrl = 'http://localhost:5000/productos';
+  private cache: any[] = [];
 
   constructor(private http: HttpClient) {}
 
-  getprods() {
-    return this.http.get<any[]>(this.API);
+  getprods(): Observable<any[]> {
+    if (this.cache.length > 0) {
+      return of(this.cache);
+    }
+
+    return this.http.get<any[]>(this.apiUrl).pipe(
+      tap(data => this.cache = data)
+    );
   }
-  createprod(prod: any) {
-    return this.http.post(this.API, prod);
-  }
-  updateprod(id: string, prod: any) {
-    return this.http.put(`${this.API}/${id}`, prod);
-  }
+
   deleteprod(id: string) {
-    return this.http.delete(`${this.API}/${id}`);
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  updateprod(id: string, prod: any) {
+    return this.http.put(`${this.apiUrl}/${id}`, prod);
   }
 }

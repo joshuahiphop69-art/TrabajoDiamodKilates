@@ -1,62 +1,33 @@
-<div class="container-fluid align-items-center justify-content-center"
-    style="background-color: #97a5b6">
-    <h3 class="fs-1 fw-bold pt-2"><strong>Lo Mejor en Joyería de Plata</strong></h3>
+<div class="container-fluid" style="background-color: #97a5b6">
 
-    <div class="row pt-2">
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow">
-                <img src="images/plata1.jpg"
-                    class="card-img-top"
-                    alt="Plata 1"
-                    style="height: 300px; object-fit: cover;">
-                <div class="card-body">
-                    <h3 class="fs-3 fw-bold"><strong>Broches para Saco de Plata</strong></h3>
-                    <h4 class="fs-5"><strong>Precio: $1,200</strong></h4>
-                    <h5 class="fs-5">Detalles: </h5>
-                    <ul style="list-style-type: circle;">
-                        <li class="fs-6">Diseños variados</li>
-                        <li class="fs-6">Elección del usuario</li>
-                        <li class="fs-6">Plata fina sin Laton</li>
-                    </ul>
-                </div>
-            </div>
+  <h3 class="fs-1 fw-bold pt-2 text-center">
+    <strong>Lo Mejor en Joyería de Plata</strong>
+  </h3>
+
+  <div class="row pt-2">
+
+    <div class="col-md-4 mb-4" *ngFor="let prod of productos">
+      <div class="card h-100 shadow">
+
+        <img [src]="prod.imagen || 'images/plata1.jpg'"
+             class="card-img-top"
+             style="height: 300px; object-fit: cover;">
+
+        <div class="card-body">
+          <h3 class="fs-5 fw-bold">{{ prod.nombre }}</h3>
+
+          <h4 class="fs-6">
+            Precio: ${{ prod.precio }}
+          </h4>
+
+          <ul>
+            <li>{{ prod.accesorio }}</li>
+            <li>Stock: {{ prod.existencias }}</li>
+          </ul>
         </div>
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow">
-                <img src="images/plata2.png"
-                    class="card-img-top"
-                    alt="Plata 2"
-                    style="height: 300px; object-fit: cover;">
-                <div class="card-body">
-                    <h3 class="fs-3 fw-bold"><strong>Anillos de Compromiso a Juego</strong></h3>
-                    <h4 class="fs-5"><strong>Precio: $1,000</strong></h4>
-                    <h5 class="fs-5">Detalles: </h5>
-                    <ul style="list-style-type: circle;">
-                        <li class="fs-6">Diamantito incrustado</li>
-                        <li class="fs-6">A juego para la pareja</li>
-                        <li class="fs-6">Grabado personalizado (precio adicional)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow">
-                <img src="images/plata3.jpg"
-                    class="card-img-top"
-                    alt="Plata 3"
-                    style="height: 300px; object-fit: cover;">
-                <div class="card-body">
-                    <h3 class="fs-3 fw-bold"><strong>Anillos de Diamante en Base de Plata</strong></h3>
-                    <h4 class="fs-5"><strong>Precio: $3,000</strong></h4>
-                    <h5 class="fs-5">Detalles: </h5>
-                    <ul style="list-style-type: circle;">
-                        <li class="fs-6">Diamante incrustado de 4 mm de grosor</li>
-                        <li class="fs-6">Molde de plata a elección del cliente</li>
-                        <li class="fs-6">Incluye set personalizado de regalo y empaque</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+
+      </div>
     </div>
-</div>
 
+  </div>
+</div>
