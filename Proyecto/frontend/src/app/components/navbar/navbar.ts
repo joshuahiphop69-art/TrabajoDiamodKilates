@@ -2,17 +2,17 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Perfiles } from '../../services/perfiles';
-
-declare var bootstrap: any;
+import { ProfileComponent } from '../../pages/logged/profile/profile';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, ProfileComponent],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
 export class Navbar {
+  readonly fallbackAvatar = 'images/eevee.jpg';
   rol: 'admin' | 'logged' | 'guest' = 'guest';
 
   constructor(private auth: Perfiles) {}
@@ -28,10 +28,19 @@ export class Navbar {
     this.rol = 'guest';
   }
 
-  openProfile() {
-    const panel = new bootstrap.Offcanvas(
-    document.getElementById('profilePanel')
-  );
-  panel.show();
+  openProfile(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    window.dispatchEvent(new CustomEvent('toggle-profile-menu'));
+  }
+
+  onAvatarError(event: Event) {
+    const target = event.target as HTMLImageElement | null;
+
+    if (!target || target.src.includes(this.fallbackAvatar)) {
+      return;
+    }
+
+    target.src = this.fallbackAvatar;
   }
 }

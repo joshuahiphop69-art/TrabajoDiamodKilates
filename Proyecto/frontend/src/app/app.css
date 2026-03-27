@@ -11,9 +11,10 @@ app-root{
 
 .main-content{
   flex: 1;
-  background-color: var(--theme-light);
+  background-color: var(--bg);
+  color: var(--text);
 }
 
 .top-shell {
-  background-color: var(--theme-dark);
+  background: var(--navbar-bg);
 }
