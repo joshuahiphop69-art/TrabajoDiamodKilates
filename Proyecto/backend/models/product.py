@@ -14,6 +14,19 @@ def get_all_prods():
     
     return prods
 
+def get_prod_by_id(id):
+    try:
+        prod = collection.find_one({"_id": ObjectId(id)})
+
+        if not prod:
+            return None
+
+        prod["_id"] = str(prod["_id"])
+        return prod
+
+    except InvalidId:
+        return None
+
 def create_prod(data):
     result = collection.insert_one(data)
     return str(result.inserted_id)

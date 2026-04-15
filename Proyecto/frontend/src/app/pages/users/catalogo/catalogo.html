@@ -15,7 +15,10 @@
 
       <div class="row" *ngIf="!cargando && !error">
         <div class="col-md-6 col-xl-4 mb-4" *ngFor="let producto of productosFiltrados">
-          <div class="card h-100 shadow product-card">
+          <a
+            class="card h-100 shadow product-card product-link"
+            [routerLink]="['/producto', producto._id]"
+            [state]="{ producto: producto }">
             <img
               [src]="getImagenProducto(producto)"
               class="card-img-top product-image"
@@ -26,7 +29,7 @@
               <p class="fw-bold text-success">Precio: ${{ producto.precio }}</p>
               <p class="product-stock mb-0">Stock: {{ getStock(producto) }}</p>
             </div>
-          </div>
+          </a>
         </div>
 
         <div class="col-12" *ngIf="!productosFiltrados.length">

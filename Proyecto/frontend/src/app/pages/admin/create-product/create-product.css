@@ -1,8 +1,38 @@
+.create-product-page {
+  width: min(100%, 1040px);
+  padding-inline: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+.create-product-card {
+  overflow: hidden;
+}
+
+.create-product-body {
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.create-product-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  column-gap: 1rem;
+  align-items: start;
+}
+
+.create-product-form > * {
+  min-width: 0;
+}
+
+.form-control,
+.form-select {
+  width: 100%;
+  min-width: 0;
+}
+
 .dropzone {
   display: block;
   border: 2px dashed var(--theme-dark);
   border-radius: 22px;
-  padding: 2rem 1.25rem;
+  padding: clamp(1.25rem, 4vw, 2rem) clamp(0.85rem, 3vw, 1.25rem);
   background: linear-gradient(135deg, rgb(250, 236, 252) 0%, var(--theme-light-soft) 100%);
   cursor: pointer;
   transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
@@ -20,18 +50,29 @@
 }
 
 .dropzone-title {
-  font-size: 1.1rem;
+  font-size: clamp(0.98rem, 2vw, 1.1rem);
   font-weight: 700;
   color: var(--theme-text);
 }
 
 .dropzone-subtitle {
+  font-size: 0.95rem;
   color: var(--theme-dark);
+}
+
+:host-context(body.dark-mode) .dropzone {
+  border-color: var(--accent-color);
+  background: linear-gradient(135deg, var(--card-bg) 0%, var(--hover-bg) 100%);
+}
+
+:host-context(body.dark-mode) .dropzone-title,
+:host-context(body.dark-mode) .dropzone-subtitle {
+  color: var(--text);
 }
 
 .preview-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
   gap: 1rem;
 }
 
@@ -59,12 +100,51 @@
 
 .preview-name {
   display: block;
+  min-width: 0;
   font-size: 0.88rem;
   color: var(--theme-text);
   word-break: break-word;
 }
 
 .form-title {
-  font-size: 1.7rem;
+  font-size: clamp(1.25rem, 3vw, 1.7rem);
   font-weight: 900;
+}
+
+.upload-field,
+.submit-field {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 768px) {
+  .create-product-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 575.98px) {
+  .create-product-page.mt-5 {
+    margin-top: 1rem !important;
+  }
+
+  .create-product-page {
+    padding-inline: 0.5rem;
+  }
+
+  .create-product-body {
+    padding: 1rem;
+  }
+
+  .preview-card img {
+    height: 140px;
+  }
+
+  .preview-meta {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .preview-meta .btn {
+    width: 100%;
+  }
 }

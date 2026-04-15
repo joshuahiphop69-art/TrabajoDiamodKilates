@@ -1,0 +1,77 @@
+<section class="product-detail-page">
+  <a class="back-link" routerLink="/catalogo">Volver al catalogo</a>
+
+  <div *ngIf="cargando && !producto" class="detail-message">
+    Cargando producto...
+  </div>
+
+  <div *ngIf="error && !producto" class="detail-message error-message">
+    {{ error }}
+  </div>
+
+  <article class="detail-layout" *ngIf="producto">
+    <section class="gallery-panel" aria-label="Imagenes del producto">
+      <div
+        class="main-image-shell"
+        (touchstart)="onTouchStart($event)"
+        (touchend)="onTouchEnd($event)">
+        <img
+          class="main-image"
+          [src]="imagenesProducto[imagenActual]"
+          [alt]="producto.nombre">
+
+        <button
+          type="button"
+          class="gallery-control gallery-control-prev"
+          *ngIf="imagenesProducto.length > 1"
+          (click)="imagenAnterior()"
+          aria-label="Ver imagen anterior">
+          &lsaquo;
+        </button>
+
+        <button
+          type="button"
+          class="gallery-control gallery-control-next"
+          *ngIf="imagenesProducto.length > 1"
+          (click)="imagenSiguiente()"
+          aria-label="Ver imagen siguiente">
+          &rsaquo;
+        </button>
+      </div>
+
+      <div class="thumbnail-row" *ngIf="imagenesProducto.length > 1">
+        <button
+          type="button"
+          class="thumbnail-button"
+          *ngFor="let imagen of imagenesProducto; let i = index"
+          [class.active]="i === imagenActual"
+          (click)="seleccionarImagen(i)"
+          [attr.aria-label]="'Ver imagen ' + (i + 1)">
+          <img [src]="imagen" [alt]="producto.nombre + ' imagen ' + (i + 1)">
+        </button>
+      </div>
+    </section>
+
+    <section class="detail-info">
+      <div class="tag-list" *ngIf="etiquetasProducto.length">
+        <span class="tag-pill" *ngFor="let etiqueta of etiquetasProducto">
+          {{ etiqueta }}
+        </span>
+      </div>
+
+      <h1 class="detail-title">{{ producto.nombre }}</h1>
+
+      <p class="detail-price">${{ producto.precio | number }}</p>
+      <p class="detail-stock">Stock disponible: {{ stockProducto }}</p>
+
+      <div class="detail-block" *ngIf="detallesProducto.length">
+        <h2>Detalles</h2>
+        <ul>
+          <li *ngFor="let detalle of detallesProducto">
+            {{ detalle }}
+          </li>
+        </ul>
+      </div>
+    </section>
+  </article>
+</section>
