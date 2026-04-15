@@ -1,0 +1,153 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 5rem;
+  padding-bottom: 8rem;
+  background: linear-gradient(135deg, rgba(113, 0, 128, 0.08) 0%, rgba(113, 0, 128, 0.04) 100%);
+}
+
+.row {
+  width: 100%;
+}
+
+.card {
+  border-radius: 14px;
+  border: none;
+  overflow: hidden;
+  max-width: 100%;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15) !important;
+  transform: translateY(-2px);
+}
+
+.card-header {
+  padding: 1.5rem 1.5rem;
+  background: linear-gradient(135deg, var(--theme-dark-strong) 0%, var(--theme-dark) 100%) !important;
+  border: none;
+  text-align: center;
+}
+
+.card-header h4 {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  letter-spacing: 0.5px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.card-body {
+  padding: 2.5rem 2rem;
+}
+
+.form-label {
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+  color: var(--text);
+  display: block;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+}
+
+.form-control {
+  padding: 0.85rem 1rem;
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  background-color: var(--input-bg);
+  color: var(--text);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  margin-bottom: 0 !important;
+}
+
+.form-control:focus {
+  border-color: var(--brand-accent);
+  box-shadow: 0 0 0 3px rgba(113, 0, 128, 0.1);
+  outline: none;
+}
+
+.form-control::placeholder {
+  color: var(--text-muted);
+}
+
+.text-danger {
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  color: #dc3545;
+  display: block;
+}
+
+.mb-3 {
+  margin-bottom: 1.5rem !important;
+}
+
+.mb-3:last-child {
+  margin-bottom: 1rem !important;
+}
+
+.d-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.btn-primary {
+  padding: 0.85rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  width: 100%;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+  }
+
+  .card-body {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .card-header {
+    padding: 1.5rem 1rem;
+  }
+
+  .card-header h4 {
+    font-size: 1.3rem;
+  }
+
+  .form-label {
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .form-control {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .mb-3 {
+    margin-bottom: 1.25rem !important;
+  }
+}

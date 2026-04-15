@@ -51,22 +51,20 @@
         <div class="orders-table" *ngIf="pedidosFiltrados.length; else emptyState">
           <article class="order-card order-head">
             <span>Folio</span>
-            <span>Cliente</span>
             <span>ID Cliente</span>
             <span>Productos</span>
             <span>Total</span>
             <span>Fecha</span>
             <span>Estado</span>
-            <span>Acciones</span>
+            <span class="text-center">Acciones</span>
           </article>
 
           <article class="order-card" *ngFor="let pedido of pedidosFiltrados">
             <span class="order-folio">{{ pedido.folio }}</span>
-            <span>{{ pedido.cliente }}</span>
-            <span>{{ pedido.clienteId }}</span>
-            <span>{{ getProductosPedido(pedido) }}</span>
+            <span class="text-muted">{{ pedido.clienteId }}</span>
+            <span class="text-muted">{{ getProductosPedido(pedido) }}</span>
             <span class="order-total">${{ pedido.total | number }}</span>
-            <span>{{ pedido.fecha }}</span>
+            <span class="text-muted">{{ pedido.fecha }}</span>
             <span class="order-status">{{ pedido.estado }}</span>
             <span class="order-actions">
               <button
@@ -74,18 +72,20 @@
                 class="order-action complete-action"
                 *ngIf="pedido.estado === 'PENDIENTES'"
                 [disabled]="actualizandoPedidoId === pedido._id"
-                (click)="completarPedido(pedido)">
-                Completar
+                (click)="completarPedido(pedido)"
+                [title]="actualizandoPedidoId === pedido._id ? 'Actualizando...' : 'Marcar como entregado'">
+                {{ actualizandoPedidoId === pedido._id ? 'Procesando...' : 'Completar' }}
               </button>
               <button
                 type="button"
                 class="order-action cancel-action"
                 *ngIf="pedido.estado === 'PENDIENTES'"
                 [disabled]="actualizandoPedidoId === pedido._id"
-                (click)="cancelarPedido(pedido)">
-                Cancelar
+                (click)="cancelarPedido(pedido)"
+                [title]="actualizandoPedidoId === pedido._id ? 'Cancelando...' : 'Marcar como cancelado'">
+                {{ actualizandoPedidoId === pedido._id ? 'Procesando...' : 'Cancelar' }}
               </button>
-              <span *ngIf="pedido.estado !== 'PENDIENTES'">Sin acciones</span>
+              <span *ngIf="pedido.estado !== 'PENDIENTES'" class="text-muted">-</span>
             </span>
           </article>
         </div>
@@ -94,7 +94,7 @@
           <div class="empty-state">
             <h3 class="empty-title">No hay pedidos en este estado</h3>
             <p class="empty-copy mb-0">
-              Cuando existan pedidos {{ estadoActivo.toLowerCase() }}, se mostraran aqui.
+              Cuando existan pedidos {{ getEstadoDescripcion(estadoActivo) }}, se mostrarán aquí.
             </p>
           </div>
         </ng-template>

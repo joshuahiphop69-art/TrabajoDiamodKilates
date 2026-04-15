@@ -1,7 +1,7 @@
-<div class="container create-product-page mt-5">
-  <div class="card create-product-card shadow border-0">
-    <div class="card-header bg-dark text-white text-center">
-      <h4 class="form-title">Publicar Nuevo Producto</h4>
+<div class="container-fluid create-product-page mt-5">
+  <div class="card create-product-card shadow-lg border-0">
+    <div class="card-header bg-dark text-white">
+      <h4 class="form-title mb-0">Publicar Nuevo Producto</h4>
     </div>
     <div class="card-body create-product-body">
       <form class="create-product-form" #productoForm="ngForm" (ngSubmit)="guardarProducto(productoForm)">
@@ -71,7 +71,7 @@
             step="1"
             pattern="^[0-9]+$"
             #etiq1Ctrl="ngModel"
-            placeholder="Ingrese la talla, entre 0 y 15">
+            placeholder="Ingrese la talla, entre 1 y 15 (o 0 si es ajustable)">
           <div *ngIf="etiq1Ctrl.invalid && etiq1Ctrl.touched" class="text-danger">
             <small *ngIf="etiq1Ctrl.errors?.['required']">Este campo es obligatorio</small>
             <small *ngIf="etiq1Ctrl.errors?.['min'] || etiq1Ctrl.errors?.['max']">Debe estar entre 0 y 15</small>
@@ -80,7 +80,7 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label fw-bold">Etiqueta 2</label>
+          <label class="form-label fw-bold">Calidad</label>
           <input
             type="text"
             class="form-control"
@@ -92,7 +92,7 @@
             step="1"
             pattern="^[0-9]+$"
             #etiq2Ctrl="ngModel"
-            placeholder="Ingrese un número entre 0 y 24">
+            placeholder="Ingrese el kilataje hasta 24 (o 0 en caso de Plata Pura)">
           <div *ngIf="etiq2Ctrl.invalid && etiq2Ctrl.touched" class="text-danger">
             <small *ngIf="etiq2Ctrl.errors?.['required']">Este campo es obligatorio</small>
             <small *ngIf="etiq2Ctrl.errors?.['min'] || etiq2Ctrl.errors?.['max']">Debe estar entre 0 y 24</small>
@@ -101,7 +101,7 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label fw-bold">Etiqueta 3</label>
+          <label class="form-label fw-bold">Público</label>
           <select
             class="form-select"
             name="etiq_3"
@@ -119,7 +119,7 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label fw-bold">Etiqueta 4</label>
+          <label class="form-label fw-bold">Color</label>
           <select
             class="form-select"
             name="etiq_4"
@@ -137,7 +137,7 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label fw-bold">Etiqueta 5</label>
+          <label class="form-label fw-bold">Extra</label>
           <input
             type="text"
             class="form-control"

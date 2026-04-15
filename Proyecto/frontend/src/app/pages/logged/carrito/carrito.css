@@ -1,14 +1,22 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
 .cart-page {
-  min-height: calc(100vh - 220px);
-  padding: 2rem 1rem 3rem;
+  min-height: 100vh;
+  padding: 2rem 1rem 6rem;
   background:
     radial-gradient(circle at top left, rgba(215, 140, 224, 0.35), transparent 28%),
     linear-gradient(180deg, var(--theme-light-soft) 0%, var(--theme-light) 100%);
+  display: flex;
+  flex-direction: column;
 }
 
 .cart-layout {
   max-width: 1280px;
   margin: 0 auto;
+  flex: 1;
   display: grid;
   grid-template-columns: minmax(0, 2.2fr) minmax(280px, 0.9fr);
   gap: 1.5rem;
@@ -229,6 +237,8 @@
 @media (max-width: 767px) {
   .cart-page {
     padding-inline: 0.75rem;
+    padding-top: 1.5rem;
+    padding-bottom: 5rem;
   }
 
   .cart-header {

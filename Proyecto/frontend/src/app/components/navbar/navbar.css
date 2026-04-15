@@ -72,6 +72,16 @@
   box-shadow: 0 8px 25px var(--shadow-color);
 }
 
+.navbar-catalog-menu .dropdown-item {
+  color: var(--text) !important;
+  transition: all 0.3s ease;
+}
+
+.navbar-catalog-menu .dropdown-item:hover {
+  color: var(--text) !important;
+  background-color: var(--hover-bg) !important;
+}
+
 .profile-trigger {
   display: inline-flex;
   align-items: center;

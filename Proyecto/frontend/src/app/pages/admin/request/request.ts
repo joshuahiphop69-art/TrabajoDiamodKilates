@@ -80,15 +80,34 @@ export class Request implements OnInit {
   }
 
   completarPedido(pedido: Pedido) {
+    if (!pedido._id) {
+      console.error('Error: El pedido no tiene un ID válido.');
+      this.error = 'Error: El pedido no tiene un ID válido.';
+      return;
+    }
     this.actualizarEstadoPedido(pedido, 'ENTREGADOS');
   }
 
   cancelarPedido(pedido: Pedido) {
+    if (!pedido._id) {
+      console.error('Error: El pedido no tiene un ID válido.');
+      this.error = 'Error: El pedido no tiene un ID válido.';
+      return;
+    }
     this.actualizarEstadoPedido(pedido, 'CANCELADOS');
   }
 
   get pedidosFiltrados() {
     return this.pedidos.filter((pedido) => pedido.estado === this.estadoActivo);
+  }
+
+  getEstadoDescripcion(estado: EstadoPedido): string {
+    const descripciones: Record<EstadoPedido, string> = {
+      'PENDIENTES': 'pendientes',
+      'ENTREGADOS': 'entregados',
+      'CANCELADOS': 'cancelados'
+    };
+    return descripciones[estado] || estado;
   }
 
   getProductosPedido(pedido: Pedido) {
@@ -105,24 +124,49 @@ export class Request implements OnInit {
   }
 
   private actualizarEstadoPedido(pedido: Pedido, estado: EstadoPedido) {
-    if (!pedido._id || this.actualizandoPedidoId) {
+    if (!pedido._id) {
+      this.error = 'Error: El pedido no tiene un ID válido.';
+      console.error('Intento de actualizar pedido sin ID:', pedido);
+      this.cd.detectChanges();
+      return;
+    }
+
+    if (this.actualizandoPedidoId) {
+      console.warn('Una actualización está en progreso');
       return;
     }
 
     this.actualizandoPedidoId = pedido._id;
     this.error = '';
     this.mensaje = '';
+    this.cd.detectChanges();
+
+    console.log(`Actualizando pedido ${pedido._id} a estado ${estado}`);
 
     this.ordersService.updateOrderStatus(pedido._id, estado).subscribe({
-      next: () => {
+      next: (response) => {
+        console.log('Respuesta exitosa del servidor:', response);
         pedido.estado = estado;
+        this.mensaje = `Pedido ${pedido.folio} actualizado a ${estado} exitosamente.`;
+        this.error = '';
         this.actualizandoPedidoId = '';
-        this.mensaje = `Pedido ${pedido.folio} actualizado.`;
         this.cd.detectChanges();
+        
+        setTimeout(() => {
+          console.log('Recargando lista de pedidos...');
+          this.cargarPedidos();
+        }, 1500);
       },
       error: (error) => {
         this.actualizandoPedidoId = '';
-        this.error = error?.error?.message || 'No fue posible actualizar el pedido.';
+        console.error('Error al actualizar pedido:', error);
+        console.error('Detalles de error:', error.error);
+        
+        const errorMsg = error?.error?.message || 
+                        error?.message || 
+                        'No fue posible actualizar el pedido en la base de datos.';
+        this.error = `Error: ${errorMsg}`;
+        this.mensaje = '';
         this.cd.detectChanges();
       }
     });

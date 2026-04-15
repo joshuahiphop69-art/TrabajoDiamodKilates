@@ -1,31 +1,161 @@
-.container {
-  min-height: 80vh;
+.contact-container {
+  min-height: 85vh;
+  padding: 2.5rem 3rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.contact-card {
+  margin-bottom: 2.5rem;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.card-header {
+  background-color: #2c3e50 !important;
+  color: white;
+  padding: 1.5rem !important;
+  border: none !important;
+}
+
+.card-header h2 {
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.custom-table {
+  margin-bottom: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.custom-table thead {
+  background-color: #f0f2f5;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.custom-table thead th {
+  padding: 1rem 1.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  border: none;
+}
+
+.custom-table tbody tr {
+  border-bottom: 1px solid #e9ecef;
+  transition: background-color 0.2s ease;
+}
+
+.custom-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.custom-table tbody td {
+  padding: 1.25rem 1.5rem;
+  vertical-align: middle;
+  color: #495057;
+  font-size: 0.95rem;
+  border: none;
+}
+
+.contacts-table {
+  margin-bottom: 0;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.contacts-table thead {
+  background-color: #f0f2f5;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.contacts-table thead th {
+  padding: 1rem 1.5rem;
+  font-weight: 600;
+  color: #2c3e50;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+  border: none;
+}
+
+.contacts-table tbody tr {
+  border-bottom: 1px solid #e9ecef;
+  transition: background-color 0.2s ease;
+}
+
+.contacts-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.contacts-table tbody td {
+  padding: 1.25rem 1.5rem;
+  vertical-align: middle;
+  color: #495057;
+  font-size: 0.95rem;
+  border: none;
 }
 
 /* Modo móvil */
 @media (max-width: 768px) {
+  .contact-container {
+    padding: 1.5rem 1rem;
+  }
 
-  .custom-table thead {
+  .contact-card {
+    margin-bottom: 1.5rem;
+  }
+
+  .custom-table thead,
+  .contacts-table thead {
     display: none;
   }
 
-  .custom-table tr {
+  .custom-table tbody tr,
+  .contacts-table tbody tr {
     display: block;
-    margin-bottom: 15px;
+    margin-bottom: 1.5rem;
     background: #fff;
     border-radius: 10px;
-    padding: 10px;
+    padding: 1rem;
+    border: none;
   }
 
-  .custom-table td {
+  .custom-table tbody td,
+  .contacts-table tbody td {
     display: flex;
     justify-content: space-between;
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e9ecef;
   }
 
-  .custom-table td::before {
+  .custom-table tbody td:last-child,
+  .contacts-table tbody td:last-child {
+    border-bottom: none;
+  }
+
+  .custom-table tbody td::before,
+  .contacts-table tbody td::before {
     content: attr(data-label);
-    font-weight: bold;
+    font-weight: 600;
+    color: #2c3e50;
+    min-width: 120px;
+  }
+
+  .card-header {
+    padding: 1rem !important;
+  }
+
+  .card-header h2 {
+    font-size: 1.1rem !important;
   }
 }
