@@ -6,6 +6,7 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 
 from models.product import get_all_prods, get_prod_by_id, create_prod, update_prod, delete_prod
+from models.order import get_all_orders, create_order, update_order_status
 
 app = Flask(__name__)
 CORS(app)
@@ -89,6 +90,44 @@ def delete_prod_route(id):
         return jsonify({"message": "Producto eliminado"}), 200
     else:
         return jsonify({"message": "Producto no encontrado"}), 404
+
+@app.route('/orders', methods=['GET'])
+def get_orders_route():
+    cliente_id = request.args.get("clienteId")
+    orders = get_all_orders(cliente_id)
+    return jsonify(orders), 200
+
+@app.route('/orders', methods=['POST'])
+def create_order_route():
+    data = request.json or {}
+
+    if not data.get("productos"):
+        return jsonify({"message": "No hay productos para generar el pedido"}), 400
+
+    if any(not product.get("productoId") and not product.get("id") for product in data.get("productos", [])):
+        return jsonify({"message": "Todos los productos del pedido deben incluir ID"}), 400
+
+    order = create_order(data)
+    return jsonify({
+        "message": "Pedido generado correctamente",
+        "order": order
+    }), 201
+
+@app.route('/orders/<id>/status', methods=['PUT'])
+def update_order_status_route(id):
+    data = request.json or {}
+    status = data.get("estado")
+    allowed_statuses = {"PENDIENTES", "ENTREGADOS", "CANCELADOS"}
+
+    if status not in allowed_statuses:
+        return jsonify({"message": "Estado de pedido no permitido"}), 400
+
+    updated = update_order_status(id, status)
+
+    if updated:
+        return jsonify({"message": "Estado de pedido actualizado"}), 200
+
+    return jsonify({"message": "Pedido no encontrado"}), 404
 
 if __name__ == '__main__':
     app.run(debug=True)

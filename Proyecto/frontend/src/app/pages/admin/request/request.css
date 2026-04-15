@@ -55,6 +55,11 @@
   font-weight: 900;
 }
 
+.orders-subtitle {
+  color: var(--theme-dark);
+  font-weight: 700;
+}
+
 .status-actions {
   display: flex;
   flex-direction: column;
@@ -99,6 +104,55 @@
   font-weight: 700;
 }
 
+.client-filter {
+  margin-bottom: 1.25rem;
+  padding: 1rem;
+  border: 1px solid rgba(113, 0, 128, 0.16);
+  border-radius: 12px;
+  background-color: var(--theme-light-soft);
+}
+
+.client-filter label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--theme-text);
+  font-weight: 800;
+}
+
+.client-filter-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 0.75rem;
+}
+
+.client-filter input {
+  min-width: 0;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid rgba(113, 0, 128, 0.2);
+  border-radius: 8px;
+  background-color: var(--card-bg);
+  color: var(--text);
+}
+
+.client-filter button,
+.order-action {
+  border: 0;
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  font-weight: 800;
+}
+
+.client-filter button {
+  background: var(--panel-strong);
+  color: var(--navbar-text);
+}
+
+.client-filter .clear-filter {
+  background: var(--hover-bg);
+  color: var(--theme-text);
+  border: 1px solid rgba(113, 0, 128, 0.16);
+}
+
 .orders-table {
   display: flex;
   flex-direction: column;
@@ -108,7 +162,7 @@
 
 .order-card {
   display: grid;
-  grid-template-columns: 0.9fr 1fr 0.9fr 1.6fr 0.8fr 0.8fr;
+  grid-template-columns: 0.8fr 0.9fr 0.9fr 1.5fr 0.7fr 0.75fr 0.8fr 1.1fr;
   gap: 1rem;
   align-items: center;
   padding: 1rem 1.15rem;
@@ -135,6 +189,31 @@
   color: var(--theme-dark);
 }
 
+.order-status {
+  font-weight: 800;
+}
+
+.order-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.complete-action {
+  background-color: rgb(33, 132, 91);
+  color: #ffffff;
+}
+
+.cancel-action {
+  background-color: var(--danger-color);
+  color: #ffffff;
+}
+
+.order-action:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
 .empty-state {
   padding: 3rem 1.25rem;
   border-radius: 24px;
@@ -149,6 +228,14 @@
 
 .empty-copy {
   color: var(--theme-dark);
+}
+
+.error-text {
+  color: var(--danger-color);
+}
+
+.success-text {
+  color: rgb(33, 132, 91);
 }
 
 @media (max-width: 991px) {
@@ -178,6 +265,10 @@
   .orders-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .client-filter-actions {
+    grid-template-columns: 1fr;
   }
 
   .order-card {

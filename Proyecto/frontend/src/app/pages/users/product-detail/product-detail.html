@@ -64,6 +64,14 @@
       <p class="detail-price">${{ producto.precio | number }}</p>
       <p class="detail-stock">Stock disponible: {{ stockProducto }}</p>
 
+      <button type="button" class="cart-button" (click)="agregarAlCarrito()">
+        Agregar al carrito
+      </button>
+
+      <p class="cart-message" *ngIf="mensajeCarrito">
+        {{ mensajeCarrito }}
+      </p>
+
       <div class="detail-block" *ngIf="detallesProducto.length">
         <h2>Detalles</h2>
         <ul>

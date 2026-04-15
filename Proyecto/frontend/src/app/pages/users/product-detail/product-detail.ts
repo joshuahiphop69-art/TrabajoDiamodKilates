@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { CartService } from '../../../services/cart';
+import { Perfiles } from '../../../services/perfiles';
 import { prod } from '../../../services/product';
 
 type ProductoDetalle = {
@@ -40,6 +42,7 @@ export class ProductDetail implements OnInit {
   stockProducto = 0;
   cargando = false;
   error = '';
+  mensajeCarrito = '';
   imagenActual = 0;
   private touchStartX = 0;
 
@@ -47,6 +50,8 @@ export class ProductDetail implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private prodService: prod,
+    private cartService: CartService,
+    private auth: Perfiles,
     private cd: ChangeDetectorRef
   ) {}
 
@@ -141,6 +146,27 @@ export class ProductDetail implements OnInit {
 
   seleccionarImagen(index: number) {
     this.imagenActual = index;
+  }
+
+  agregarAlCarrito() {
+    if (!this.producto) {
+      return;
+    }
+
+    if (this.auth.getRole() !== 'logged') {
+      this.mensajeCarrito = 'Inicia sesión como cliente para agregar productos al carrito.';
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    this.cartService.addItem({
+      productoId: this.producto._id,
+      nombre: this.producto.nombre,
+      precio: Number(this.producto.precio),
+      imagen: this.imagenesProducto[0]
+    });
+
+    this.mensajeCarrito = 'Producto agregado al carrito.';
   }
 
   onTouchStart(event: TouchEvent) {

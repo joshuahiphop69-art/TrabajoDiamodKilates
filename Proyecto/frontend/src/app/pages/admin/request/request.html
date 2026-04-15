@@ -2,7 +2,7 @@
   <div class="request-layout">
     <aside class="status-panel">
       <div class="status-panel-body">
-        <p class="panel-kicker mx-4">Gestión de pedidos</p>
+        <p class="panel-kicker mx-4">Listado de Pedidos</p>
 
         <div class="status-actions">
           <button
@@ -21,12 +21,32 @@
       <div class="orders-panel-body">
         <div class="orders-header">
           <div>
-            <h2 class="orders-title mb-0">LISTADO DE {{ estadoActivo }}</h2>
+            <h2 class="orders-title mb-0">Listado de Pedidos</h2>
+            <p class="orders-subtitle mb-0">Estado actual: {{ estadoActivo }}</p>
+            <p class="empty-copy mb-0" *ngIf="cargando">Cargando pedidos...</p>
+            <p class="empty-copy mb-0 error-text" *ngIf="error">{{ error }}</p>
+            <p class="empty-copy mb-0 success-text" *ngIf="mensaje">{{ mensaje }}</p>
           </div>
           <span class="orders-count">
             {{ pedidosFiltrados.length }} pedidos
           </span>
         </div>
+
+        <form class="client-filter" (ngSubmit)="buscarPorCliente()">
+          <label for="clienteIdFiltro">Buscar por ID de cliente</label>
+          <div class="client-filter-actions">
+            <input
+              id="clienteIdFiltro"
+              type="text"
+              name="clienteIdFiltro"
+              [(ngModel)]="clienteIdFiltro"
+              placeholder="Ej. 7717717711">
+            <button type="submit">Cargar pedidos</button>
+            <button type="button" class="clear-filter" (click)="limpiarFiltroCliente()">
+              Limpiar
+            </button>
+          </div>
+        </form>
 
         <div class="orders-table" *ngIf="pedidosFiltrados.length; else emptyState">
           <article class="order-card order-head">
@@ -36,15 +56,37 @@
             <span>Productos</span>
             <span>Total</span>
             <span>Fecha</span>
+            <span>Estado</span>
+            <span>Acciones</span>
           </article>
 
           <article class="order-card" *ngFor="let pedido of pedidosFiltrados">
             <span class="order-folio">{{ pedido.folio }}</span>
             <span>{{ pedido.cliente }}</span>
             <span>{{ pedido.clienteId }}</span>
-            <span>{{ pedido.productos }}</span>
+            <span>{{ getProductosPedido(pedido) }}</span>
             <span class="order-total">${{ pedido.total | number }}</span>
             <span>{{ pedido.fecha }}</span>
+            <span class="order-status">{{ pedido.estado }}</span>
+            <span class="order-actions">
+              <button
+                type="button"
+                class="order-action complete-action"
+                *ngIf="pedido.estado === 'PENDIENTES'"
+                [disabled]="actualizandoPedidoId === pedido._id"
+                (click)="completarPedido(pedido)">
+                Completar
+              </button>
+              <button
+                type="button"
+                class="order-action cancel-action"
+                *ngIf="pedido.estado === 'PENDIENTES'"
+                [disabled]="actualizandoPedidoId === pedido._id"
+                (click)="cancelarPedido(pedido)">
+                Cancelar
+              </button>
+              <span *ngIf="pedido.estado !== 'PENDIENTES'">Sin acciones</span>
+            </span>
           </article>
         </div>
 
@@ -52,7 +94,7 @@
           <div class="empty-state">
             <h3 class="empty-title">No hay pedidos en este estado</h3>
             <p class="empty-copy mb-0">
-              Cuando existan pedidos {{ estadoActivo.toLowerCase() }}, se mostrarán aquí.
+              Cuando existan pedidos {{ estadoActivo.toLowerCase() }}, se mostraran aqui.
             </p>
           </div>
         </ng-template>
