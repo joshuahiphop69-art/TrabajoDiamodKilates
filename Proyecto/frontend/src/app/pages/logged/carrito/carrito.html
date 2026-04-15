@@ -11,21 +11,45 @@
         </div>
 
         <div class="cart-list" *ngIf="productos.length; else emptyCart">
+          <p class="quantity-warning">
+            Solo se puede solicitar un máximo de 3 piezas por producto.
+          </p>
+
           <article class="product-card" *ngFor="let producto of productos">
+            <img
+              class="cart-product-image"
+              *ngIf="producto.imagen"
+              [src]="producto.imagen"
+              [alt]="producto.nombre">
+
             <div class="product-info">
               <p class="product-label mb-1">Nombre del producto</p>
               <h2 class="product-name mb-0">{{ producto.nombre }}</h2>
+              <label class="quantity-label" [for]="'cantidad-' + producto.productoId">
+                Cantidad por producto
+              </label>
+              <select
+                class="quantity-select"
+                [id]="'cantidad-' + producto.productoId"
+                [value]="producto.cantidad"
+                (change)="actualizarCantidad(producto.productoId, $event)">
+                <option [value]="1">1</option>
+                <option [value]="2">2</option>
+                <option [value]="3">3</option>
+              </select>
             </div>
 
             <div class="product-price-block">
               <p class="product-label mb-1">Precio</p>
-              <p class="product-price mb-0">${{ producto.precio | number }}</p>
+              <p class="product-price mb-0">
+                ${{ producto.precio * producto.cantidad | number }}
+              </p>
             </div>
 
             <button
               type="button"
               class="btn remove-button"
-              (click)="eliminarDelCarrito(producto.id)">
+              (click)="eliminarDelCarrito(producto.productoId)">
               Eliminar del carrito
             </button>
           </article>
@@ -46,6 +70,7 @@
       <div class="card-body p-4">
         <p class="actions-eyebrow mb-2">Acciones rápidas</p>
         <h2 class="actions-title">Siguiente paso</h2>
+        <p class="cart-total">Total: ${{ total | number }}</p>
 
         <div class="actions-list">
           <button type="button" class="btn action-button secondary-action">
@@ -56,10 +81,17 @@
             Seguir comprando
           </a>
 
-          <button type="button" class="btn action-button accent-action">
-            Finalizar pedido
+          <button
+            type="button"
+            class="btn action-button accent-action"
+            [disabled]="!productos.length || generandoPedido"
+            (click)="generarPedido()">
+            {{ generandoPedido ? 'Generando...' : 'Finalizar pedido' }}
           </button>
         </div>
+
+        <p class="order-message" *ngIf="mensajePedido">{{ mensajePedido }}</p>
+        <p class="order-error" *ngIf="errorPedido">{{ errorPedido }}</p>
       </div>
     </aside>
   </div>

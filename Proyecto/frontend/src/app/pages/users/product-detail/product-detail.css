@@ -147,6 +147,27 @@
   font-weight: 700;
 }
 
+.cart-button {
+  width: 100%;
+  margin-bottom: 0.75rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--accent-color);
+  border-radius: 8px;
+  background: var(--panel-strong);
+  color: var(--navbar-text);
+  font-weight: 800;
+}
+
+.cart-button:hover {
+  filter: brightness(1.05);
+}
+
+.cart-message {
+  margin: 0 0 1rem;
+  color: var(--text-strong);
+  font-weight: 700;
+}
+
 .detail-block {
   border-top: 1px solid var(--border-color);
   padding-top: 1rem;
