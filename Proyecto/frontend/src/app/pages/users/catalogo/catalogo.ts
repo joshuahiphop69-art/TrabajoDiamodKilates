@@ -1,16 +1,25 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { prod } from '../../../services/product';
 
 type ProductoCatalogo = {
   _id: string;
   nombre: string;
   precio: number;
+  material?: string;
   stock?: number;
   existencias?: number;
   categoria?: string;
+  etiq_1?: string;
   etiq_2?: string;
+  etiq_3?: string;
+  etiq_4?: string;
+  etiq_5?: string;
+  deta_1?: string;
+  deta_2?: string;
+  deta_3?: string;
   img_1?: string;
   img_2?: string;
   img_3?: string;
@@ -20,7 +29,7 @@ type ProductoCatalogo = {
 @Component({
   selector: 'app-catalogo',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './catalogo.html',
   styleUrl: './catalogo.css',
 })
@@ -45,7 +54,10 @@ export class Catalogo implements OnInit {
   cargando = false;
   error = '';
 
-  constructor(private prodService: prod) {
+  constructor(
+    private prodService: prod,
+    private cd: ChangeDetectorRef
+  ) {
     this.filtros.forEach((filtro) => {
       this.filtrosSeleccionados[filtro] = false;
     });
@@ -62,12 +74,14 @@ export class Catalogo implements OnInit {
     this.prodService.getprods().subscribe({
       next: (data) => {
         this.productos = data;
-        this.productosFiltrados = data;
+        this.productosFiltrados = [...data];
         this.cargando = false;
+        this.cd.detectChanges();
       },
       error: () => {
         this.error = 'No fue posible cargar el catálogo.';
         this.cargando = false;
+        this.cd.detectChanges();
       }
     });
   }
@@ -79,6 +93,7 @@ export class Catalogo implements OnInit {
 
     if (!filtrosActivos.length) {
       this.productosFiltrados = [...this.productos];
+      this.cd.detectChanges();
       return;
     }
 
@@ -87,6 +102,7 @@ export class Catalogo implements OnInit {
         producto.etiq_2 === filtro || producto.categoria === filtro
       )
     );
+    this.cd.detectChanges();
   }
 
   getImagenProducto(producto: ProductoCatalogo) {
@@ -96,7 +112,11 @@ export class Catalogo implements OnInit {
       return 'images/diamantes.jpg';
     }
 
-    return ruta.startsWith('/') ? ruta : `/${ruta}`;
+    if (ruta.startsWith('/') || ruta.startsWith('http://') || ruta.startsWith('https://')) {
+      return ruta;
+    }
+
+    return `/${ruta}`;
   }
 
   getStock(producto: ProductoCatalogo) {

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { Home } from './pages/users/home/home';
 import { Catalogo } from './pages/users/catalogo/catalogo';
+import { ProductDetail } from './pages/users/product-detail/product-detail';
 import { ProdOro } from './pages/users/prod-oro/prod-oro';
 import { ProdPlata } from './pages/users/prod-plata/prod-plata';
 import { Contact } from './pages/users/contact/contact';
@@ -21,6 +22,7 @@ import { Products } from './pages/admin/products/products';
 export const routes: Routes = [
     { path: "", component: Home },
     { path: "catalogo", component: Catalogo },
+    { path: "producto/:id", component: ProductDetail },
     { path: "secc_oro", component: ProdOro },
     { path: "secc_plt", component: ProdPlata },
     { path: "acerca_de", component: Contact },

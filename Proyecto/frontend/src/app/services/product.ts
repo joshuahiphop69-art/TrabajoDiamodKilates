@@ -13,6 +13,9 @@ export class prod {
   getprods() {
     return this.http.get<any[]>(this.API);
   }
+  getprod(id: string) {
+    return this.http.get<any>(`${this.API}/${id}`);
+  }
   createprod(prod: any) {
     return this.http.post(this.API, prod);
   }

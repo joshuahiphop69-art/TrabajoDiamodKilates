@@ -1,10 +1,10 @@
-<div class="container mt-5">
-  <div class="card shadow border-0">
+<div class="container create-product-page mt-5">
+  <div class="card create-product-card shadow border-0">
     <div class="card-header bg-dark text-white text-center">
       <h4 class="form-title">Publicar Nuevo Producto</h4>
     </div>
-    <div class="card-body">
-      <form #productoForm="ngForm" (ngSubmit)="guardarProducto(productoForm)">
+    <div class="card-body create-product-body">
+      <form class="create-product-form" #productoForm="ngForm" (ngSubmit)="guardarProducto(productoForm)">
         <div class="mb-3">
           <label class="form-label fw-bold">Nombre</label>
           <input
@@ -59,7 +59,7 @@
         </div>
 
         <div class="mb-3">
-          <label class="form-label fw-bold">Etiqueta 1</label>
+          <label class="form-label fw-bold">Talla</label>
           <input
             type="number"
             class="form-control"
@@ -71,7 +71,7 @@
             step="1"
             pattern="^[0-9]+$"
             #etiq1Ctrl="ngModel"
-            placeholder="Ingrese un número entre 0 y 15">
+            placeholder="Ingrese la talla, entre 0 y 15">
           <div *ngIf="etiq1Ctrl.invalid && etiq1Ctrl.touched" class="text-danger">
             <small *ngIf="etiq1Ctrl.errors?.['required']">Este campo es obligatorio</small>
             <small *ngIf="etiq1Ctrl.errors?.['min'] || etiq1Ctrl.errors?.['max']">Debe estar entre 0 y 15</small>
@@ -82,7 +82,7 @@
         <div class="mb-3">
           <label class="form-label fw-bold">Etiqueta 2</label>
           <input
-            type="number"
+            type="text"
             class="form-control"
             name="etiq_2"
             [(ngModel)]="producto.etiq_2"
@@ -243,7 +243,7 @@
           </div>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-4 upload-field">
           <label class="form-label fw-bold">Imágenes del producto</label>
 
           <label
@@ -268,7 +268,7 @@
           </label>
 
           <small class="text-muted d-block mt-2">
-            Máximo 4 imágenes. Se guardarán en <code>public/images</code>.
+            Máximo 4 imágenes. Se guardarán para mostrarse en el catálogo.
           </small>
 
           <div *ngIf="errorImagenes" class="text-danger mt-2">
@@ -291,7 +291,7 @@
           </div>
         </div>
 
-        <div class="d-grid">
+        <div class="d-grid submit-field">
           <button
             type="submit"
             class="btn btn-success"
