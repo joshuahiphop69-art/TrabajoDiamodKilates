@@ -1,16 +1,21 @@
 from datetime import datetime
+import os
 
-from bson.objectid import ObjectId
-from bson.objectid import InvalidId
+from dotenv import load_dotenv
+from bson.objectid import ObjectId, InvalidId
 from pymongo import MongoClient
 
-client = MongoClient("mongodb://localhost:27017/")
-db = client["diamond"]
+load_dotenv()
+
+client = MongoClient(os.getenv("MONGO_URI"))
+db = client[os.getenv("DB_NAME")]
 collection = db["pedidos"]
+
 
 def _serialize_order(order):
     order["_id"] = str(order["_id"])
     return order
+
 
 def get_all_orders(cliente_id=None):
     query = {}
@@ -20,6 +25,7 @@ def get_all_orders(cliente_id=None):
 
     orders = list(collection.find(query).sort("fecha_creacion", -1))
     return [_serialize_order(order) for order in orders]
+
 
 def create_order(data):
     now = datetime.now()
@@ -48,6 +54,7 @@ def create_order(data):
     result = collection.insert_one(order)
     order["_id"] = str(result.inserted_id)
     return order
+
 
 def update_order_status(id, status):
     try:
