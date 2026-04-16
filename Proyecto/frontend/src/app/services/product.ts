@@ -5,26 +5,31 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class prod {
-  private API = 'http://localhost:5000/list-products';
-  private uploadAPI = 'http://localhost:5000/upload-product-images';
+  private API = 'https://trabajodiamodkilates.onrender.com/list-products';
+  private uploadAPI = 'https://trabajodiamodkilates.onrender.com/upload-product-images';
 
   constructor(private http: HttpClient) {}
 
   getprods() {
     return this.http.get<any[]>(this.API);
   }
+
   getprod(id: string) {
     return this.http.get<any>(`${this.API}/${id}`);
   }
+
   createprod(prod: any) {
     return this.http.post(this.API, prod);
   }
+
   updateprod(id: string, prod: any) {
     return this.http.put(`${this.API}/${id}`, prod);
   }
+
   deleteprod(id: string) {
     return this.http.delete(`${this.API}/${id}`);
   }
+
   uploadImages(files: File[]) {
     const formData = new FormData();
 

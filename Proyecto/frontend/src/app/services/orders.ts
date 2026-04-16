@@ -5,12 +5,15 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class OrdersService {
-  private API = 'http://localhost:5000/orders';
+  private API = 'https://trabajodiamodkilates.onrender.com/orders';
 
   constructor(private http: HttpClient) {}
 
   getOrders(clienteId = '') {
-    const url = clienteId ? `${this.API}?clienteId=${encodeURIComponent(clienteId)}` : this.API;
+    const url = clienteId
+      ? `${this.API}?clienteId=${encodeURIComponent(clienteId)}`
+      : this.API;
+
     return this.http.get<any[]>(url);
   }
 
