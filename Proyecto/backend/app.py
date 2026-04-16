@@ -5,8 +5,19 @@ from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
 
-from models.product import get_all_prods, get_prod_by_id, create_prod, update_prod, delete_prod
-from models.order import get_all_orders, create_order, update_order_status
+from backend.models.product import (
+    get_all_prods,
+    get_prod_by_id,
+    create_prod,
+    update_prod,
+    delete_prod
+)
+
+from backend.models.order import (
+    get_all_orders,
+    create_order,
+    update_order_status
+)
 
 app = Flask(__name__)
 CORS(app)
